@@ -1,9 +1,9 @@
-# CIIC Harness
+# CIIC Harness  
 
 A template SoC for Google SKY130 free shuttles. It is still WIP. The current SoC architecture is given below.
 
 <p align=”center”>
-<img src="/doc/ciic_harness.png" width="75%" height="75%">
+<img src="/doc/ciic_harness.png" width="75%" height="75%"> 
 </p>
 
 
