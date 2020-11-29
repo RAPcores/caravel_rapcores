@@ -77,14 +77,16 @@ module user_proj_example #(
     assign wbs_dat_o = rdata;
     assign wdata = wbs_dat_i;
 
-    // IO
-    assign io_out = count;
-    assign io_oeb = {(`MPRJ_IO_PADS-1){rst}};
+    
+    // output enn 37:0  7654321098765432109876543210
+    assign io_oeb = 38'b1111100110011001011111111111;
+    // currently unused 37:34, 7:0
+
 
     // LA
-    assign la_data_out = {{(127-BITS){1'b0}}, count};
+//    assign la_data_out = {{(127-BITS){1'b0}}, count};
     // Assuming LA probes [63:32] are for controlling the count register
-    assign la_write = ~la_oen[63:32] & ~{BITS{valid}};
+//    assign la_write = ~la_oen[63:32] & ~{BITS{valid}};
     // Assuming LA probes [65:64] are for controlling the count clk & reset
     assign clk = wb_clk_i;
     assign rst = (~la_oen[65]) ? la_data_in[65]: wb_rst_i;
