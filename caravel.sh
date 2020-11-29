@@ -1,9 +1,8 @@
 #! /usr/bin/env bash
 
 export PDK_ROOT=`pwd`/pdk_root
-export OPENLANE_ROOT=`pwd`/openlane
+export OPENLANE_ROOT=`pwd`/openlane_repo
 echo $PDK_ROOT
 echo $OPENLANE_ROOT
-git clone ../caravel
-cd caravel/openlane
-make user_project_wrapper OPENLANE_IMAGE_NAME=openlane:rc5
+cd openlane
+make user_proj_example OPENLANE_IMAGE_NAME=openlane:rc5
