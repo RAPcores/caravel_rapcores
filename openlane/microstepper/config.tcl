@@ -3,6 +3,19 @@ set script_dir [file dirname [file normalize [info script]]]
 set ::env(DESIGN_NAME) microstepper_top
 
 set ::env(PDN_CFG) $script_dir/pdn.tcl
+set ::env(_SPACING) 1.6
+set ::env(_WIDTH) 3
+
+set power_domains [list {vccd1 vssd1} {vccd2 vssd2} {vdda1 vssa1} {vdda2 vssa2}]
+
+set ::env(_VDD_NET_NAME) vccd1
+set ::env(_GND_NET_NAME) vssd1
+set ::env(_V_OFFSET) 14
+set ::env(_H_OFFSET) $::env(_V_OFFSET)
+set ::env(_V_PITCH) 180
+set ::env(_H_PITCH) 180
+set ::env(_V_PDN_OFFSET) 0
+set ::env(_H_PDN_OFFSET) 0
 
 set ::env(STD_CELL_LIBRARY) "sky130_fd_sc_hvl"
 
