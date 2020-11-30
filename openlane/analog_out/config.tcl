@@ -2,6 +2,7 @@ set script_dir [file dirname [file normalize [info script]]]
 
 set ::env(DESIGN_NAME) analog_out
 
+set ::env(PDN_CFG) $script_dir/pdn.tcl
 
 set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/microstepper/analog_out.v"
