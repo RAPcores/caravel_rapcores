@@ -2,6 +2,22 @@ set script_dir [file dirname [file normalize [info script]]]
 
 set ::env(DESIGN_NAME) rapcore
 
+set ::env(ROUTING_CORES) 6
+set ::env(PDN_CFG) $script_dir/pdn.tcl
+set ::env(_SPACING) 1.6
+set ::env(_WIDTH) 3
+set power_domains [list {vccd1 vssd1} {vccd2 vssd2} {vdda1 vssa1} {vdda2 vssa2}]
+
+set ::env(_VDD_NET_NAME) vccd1
+set ::env(_GND_NET_NAME) vssd1
+set ::env(_V_OFFSET) 14
+set ::env(_H_OFFSET) $::env(_V_OFFSET)
+set ::env(_V_PITCH) 180
+set ::env(_H_PITCH) 180
+set ::env(_V_PDN_OFFSET) 0
+set ::env(_H_PDN_OFFSET) 0
+
+
 set ::env(VERILOG_FILES) "\
         $script_dir/../../verilog/rtl/defines.v \
         $script_dir/../../rapcores/src/constants.v \
@@ -21,10 +37,10 @@ set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/microstepper/mytimer.v"
 
 set ::env(CLOCK_PORT) "wb_clk_i"
-set ::env(CLOCK_PERIOD) "10"
+set ::env(CLOCK_PERIOD) "15"
 
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 2500 3500"
+set ::env(DIE_AREA) "0 0 2920 3520"
 set ::env(DESIGN_IS_CORE) 0
 
 set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
