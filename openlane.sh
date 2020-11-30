@@ -3,7 +3,7 @@
 # build openlane
 mkdir -p pdk_root
 export PDK_ROOT=`pwd`/pdk_root
-git clone https://github.com/RAPcores/openlane.git --branch rapcore_flow openlane_repo
+git submodule init
 cd openlane_repo
 make
 cd docker_build

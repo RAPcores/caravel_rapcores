@@ -1,3 +1,6 @@
 [submodule "rapcores"]
 	path = rapcores
 	url = git@github.com:RAPcores/rapcores.git
+[submodule "openlane_repo"]
+	path = openlane_repo
+	url = git@github.com:RAPcores/openlane.git
