@@ -9,3 +9,4 @@ make
 cd docker_build
 make merge
 cd ../..
+chmod +x openlane_repo/scripts/*
