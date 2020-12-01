@@ -21,15 +21,22 @@ set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/microstepper/mytimer.v"
 
 set ::env(CLOCK_PORT) "wb_clk_i"
-set ::env(CLOCK_PERIOD) "10"
+set ::env(CLOCK_PERIOD) "15"
 
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 2500 3500"
+set ::env(DIE_AREA) "0 0 400 400"
 set ::env(DESIGN_IS_CORE) 0
 
 set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 # set ::env(FP_CONTEXT_DEF) $script_dir/../user_project_wrapper/runs/user_project_wrapper/tmp/floorplan/ioPlacer.def.macro_placement.def
 # set ::env(FP_CONTEXT_LEF) $script_dir/../user_project_wrapper/runs/user_project_wrapper/tmp/merged_unpadded.lef
 
-set ::env(PL_BASIC_PLACEMENT) 1
-set ::env(PL_TARGET_DENSITY) 0.01
+#set ::env(PL_BASIC_PLACEMENT) 40
+#set ::env(PL_TARGET_DENSITY) 0.45
+
+# Routing
+# -------
+
+# Go fast
+set ::env(ROUTING_CORES) 6
+#set ::env(GLB_RT_ALLOW_CONGESTION) 1
