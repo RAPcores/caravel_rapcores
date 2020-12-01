@@ -4,7 +4,7 @@ set script_dir [file dirname [file normalize [info script]]]
 prep -design $script_dir -tag user_project_wrapper -overwrite
 set save_path $script_dir/../..
 
-run_synthesis
+verilog_elaborate
 
 init_floorplan
 
@@ -14,9 +14,9 @@ set ::env(FP_DEF_TEMPATE) $script_dir/../../def/user_project_wrapper_empty.def
 
 apply_def_template
 
-add_macro_placement rapcore
+add_macro_placement top 1150 1700 N
 
-#manual_macro_placement f
+manual_macro_placement f
 
 set ::env(_SPACING) 1.6
 set ::env(_WIDTH) 3
