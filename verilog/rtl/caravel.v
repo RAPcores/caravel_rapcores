@@ -23,18 +23,23 @@
 
 `include "libs.ref/sky130_fd_io/verilog/sky130_fd_io.v"
 `include "libs.ref/sky130_fd_io/verilog/sky130_ef_io.v"
-`include "libs.tech/openlane/custom_cells/verilog/sky130_ef_io__gpiov2_pad_wrapped.v"
+`include "libs.ref/sky130_fd_io/verilog/sky130_ef_io__gpiov2_pad_wrapped.v"
 
 `include "libs.ref/sky130_fd_sc_hd/verilog/primitives.v"
 `include "libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v"
 `include "libs.ref/sky130_fd_sc_hvl/verilog/primitives.v"
 `include "libs.ref/sky130_fd_sc_hvl/verilog/sky130_fd_sc_hvl.v"
 
-`include "mgmt_soc.v"
-`include "housekeeping_spi.v"
+`ifdef GL
+	`include "gl/mgmt_core.v"
+`else
+	`include "mgmt_soc.v"
+	`include "housekeeping_spi.v"
+	`include "caravel_clocking.v"
+	`include "mgmt_core.v"
+`endif
+
 `include "digital_pll.v"
-`include "caravel_clocking.v"
-`include "mgmt_core.v"
 `include "mgmt_protect.v"
 `include "mgmt_protect_hv.v"
 `include "mprj_io.v"
@@ -356,8 +361,8 @@ module caravel (
 
     mgmt_core soc (
 	`ifdef USE_POWER_PINS
-		.vdd1v8(vccd),
-		.vss(vssa),
+		.VPWR(vccd),
+		.VGND(vssa),
 	`endif
 		// GPIO (1 pin)
 		.gpio_out_pad(gpio_out_core),
