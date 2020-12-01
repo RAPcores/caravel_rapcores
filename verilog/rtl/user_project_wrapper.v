@@ -89,7 +89,11 @@ module user_project_wrapper #(
         .SCK(io_in[10]),
         .CS(io_in[9]),
         .COPI(io_in[8]),
-        .CIPO(io_out[11])
+        .CIPO(io_out[11]),
+        .STEPOUTPUT(io_out[30]),
+        .DIROUTPUT(io_out[31]),
+        .STEPINPUT(io_in[32]),
+        .DIRINPUT(io_in[33])
     );
 
 endmodule	// user_project_wrapper
@@ -118,7 +122,11 @@ module top (
       input ENC_A,
       output BUFFER_DTR,
       output MOVE_DONE,
-      input HALT
+      input HALT,
+      input STEPINPUT,
+      input DIRINPUT,
+      output STEPOUTPUT,
+      output DIROUTPUT
 );
 endmodule
 
