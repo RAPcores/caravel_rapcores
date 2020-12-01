@@ -1,6 +1,6 @@
 set script_dir [file dirname [file normalize [info script]]]
 
-set ::env(DESIGN_NAME) rapcore
+set ::env(DESIGN_NAME) top
 
 set ::env(VERILOG_FILES) "\
         $script_dir/../../verilog/rtl/defines.v \
@@ -8,7 +8,6 @@ set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcore_caravel_defines.v \
         $script_dir/../../rapcores/src/macro_params.v \
         $script_dir/../../rapcores/src/top.v \
-        $script_dir/../../verilog/rtl/rapcore.v \
         $script_dir/../../rapcores/src/stepper.v \
         $script_dir/../../rapcores/src/spi.v \
         $script_dir/../../rapcores/src/quad_enc.v \
@@ -20,11 +19,11 @@ set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/microstepper/chargepump.v \
         $script_dir/../../rapcores/src/microstepper/mytimer.v"
 
-set ::env(CLOCK_PORT) "wb_clk_i"
+set ::env(CLOCK_PORT) "CLK"
 set ::env(CLOCK_PERIOD) "15"
 
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 400 400"
+set ::env(DIE_AREA) "0 0 560 560"
 set ::env(DESIGN_IS_CORE) 0
 
 set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
