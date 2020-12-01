@@ -2,8 +2,6 @@ set script_dir [file dirname [file normalize [info script]]]
 
 set ::env(DESIGN_NAME) analog_out
 
-set ::env(PDN_CFG) $script_dir/pdn.tcl
-
 set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/microstepper/analog_out.v"
 
@@ -13,6 +11,8 @@ set ::env(CLOCK_PERIOD) "10"
 set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 100 100"
 set ::env(DESIGN_IS_CORE) 0
+set ::env(FP_PDN_CORE_RING) 0
+set ::env(GLB_RT_MAXLAYER) 5
 
 #set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 

@@ -2,7 +2,6 @@ set script_dir [file dirname [file normalize [info script]]]
 
 set ::env(DESIGN_NAME) cosine
 
-
 set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/microstepper/cosine.v"
 
@@ -12,6 +11,7 @@ set ::env(VERILOG_FILES) "\
 set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 100 100"
 set ::env(DESIGN_IS_CORE) 0
+set ::env(GLB_RT_MAXLAYER) 5
 
 #set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 
