@@ -47,3 +47,6 @@ set ::env(DIODE_INSERTION_STRATEGY) 3
 # Go fast
 set ::env(ROUTING_CORES) 6
 #set ::env(GLB_RT_ALLOW_CONGESTION) 1
+
+# block met5 with obstruction
+set ::env(GLB_RT_OBS) "met5 0 0 800 800"
