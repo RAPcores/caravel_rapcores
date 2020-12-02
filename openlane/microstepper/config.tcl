@@ -46,33 +46,38 @@ set ::env(GLB_RT_OBS) "met5 0 0 1000 1000"
 
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
 
+
+set verilog_root $script_dir/../../rapcores/src/microstepper
+set lef_root $script_dir/../../lef
+set gds_root $script_dir/../../gds
+
 set ::env(VERILOG_FILES) "\
-        $script_dir/../../rapcores/src/microstepper/microstepper_top.v"
+	$verilog_root/microstepper_top.v"
 
 set ::env(VERILOG_FILES_BLACKBOX) "\
-	$script_dir/../../rapcores/src/microstepper/microstepper_control.v \
-	$script_dir/../../rapcores/src/microstepper/analog_out.v \
-	$script_dir/../../rapcores/src/microstepper/microstep_counter.v \
-	$script_dir/../../rapcores/src/microstepper/mytimer_8.v \
-	$script_dir/../../rapcores/src/microstepper/mytimer_10.v \
-	$script_dir/../../rapcores/src/microstepper/cosine.v \
-        $script_dir/../../rapcores/src/microstepper/chargepump.v"
+	$verilog_root/microstepper_control.v \
+	$verilog_root/analog_out.v \
+	$verilog_root/microstep_counter.v \
+	$verilog_root/mytimer_8.v \
+	$verilog_root/mytimer_10.v \
+	$verilog_root/cosine.v \
+    $verilog_root/chargepump.v"
 
 set ::env(EXTRA_LEFS) "\
-	$script_dir/../../lef/microstepper_control.lef \
-	$script_dir/../../lef/analog_out.lef \
-	$script_dir/../../lef/microstep_counter.lef \
-	$script_dir/../../lef/mytimer_8.lef \
-	$script_dir/../../lef/mytimer_10.lef \
-	$script_dir/../../lef/cosine.lef \
-	$script_dir/../../lef/chargepump.lef"
+	$lef_root/microstepper_control.lef \
+	$lef_root/analog_out.lef \
+	$lef_root/microstep_counter.lef \
+	$lef_root/mytimer_8.lef \
+	$lef_root/mytimer_10.lef \
+	$lef_root/cosine.lef \
+	$lef_root/chargepump.lef"
 
 set ::env(EXTRA_GDS_FILES) "\
-	$script_dir/../../gds/microstepper_control.gds \
-	$script_dir/../../gds/analog_out.gds \
-	$script_dir/../../gds/microstep_counter.gds \
-	$script_dir/../../gds/mytimer_8.gds \
-	$script_dir/../../gds/mytimer_10.gds \
-	$script_dir/../../gds/cosine.gds \
-	$script_dir/../../gds/chargepump.gds"
+	$gds_root/microstepper_control.gds \
+	$gds_root/analog_out.gds \
+	$gds_root/microstep_counter.gds \
+	$gds_root/mytimer_8.gds \
+	$gds_root/mytimer_10.gds \
+	$gds_root/cosine.gds \
+	$gds_root/chargepump.gds"
 
