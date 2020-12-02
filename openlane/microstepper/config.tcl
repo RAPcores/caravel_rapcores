@@ -9,8 +9,8 @@ set ::env(DESIGN_NAME) microstepper_top
 #set ::env(_WIDTH) 3
 #set power_domains [list {vccd1 vssd1} {vccd2 vssd2} {vdda1 vssa1} {vdda2 vssa2}]
 
-#set ::env(_VDD_NET_NAME) vccd1
-#set ::env(_GND_NET_NAME) vssd1
+set ::env(_VDD_NET_NAME) vccd1
+set ::env(_GND_NET_NAME) vssd1
 #set ::env(_V_OFFSET) 14
 #set ::env(_H_OFFSET) $::env(_V_OFFSET)
 #set ::env(_V_PITCH) 180
@@ -22,27 +22,29 @@ set ::env(CLOCK_PORT) "clk"
 set ::env(CLOCK_PERIOD) "10"
 
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 750 750"
+set ::env(DIE_AREA) "0 0 600 600"
 set ::env(DESIGN_IS_CORE) 0
 
 #set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 set ::env(SYNTH_READ_BLACKBOX_LIB) 1
 
-set ::env(PL_BASIC_PLACEMENT) 1
-#set ::env(FP_CORE_UTIL) "9"
-#set ::env(PL_TARGET_DENSITY) "0.42"
+#set ::env(PL_BASIC_PLACEMENT) 0
 set ::env(GLB_RT_ALLOW_CONGESTION) 1
-set ::env(PL_TARGET_DENSITY) 0.55
-set ::env(PL_RANDOM_GLB_PLACEMENT) 1
-set ::env(PL_BASIC_PLACEMENT) 0
-set ::env(PL_SKIP_INITIAL_PLACEMENT) 0 
-set ::env(CELL_PAD) 6
+#set ::env(FP_CORE_UTIL) 9
+#set ::env(PL_TARGET_DENSITY) 0.40
+#set ::env(PL_RANDOM_GLB_PLACEMENT) 0
+#set ::env(PL_SKIP_INITIAL_PLACEMENT) 0
+#set ::env(CELL_PAD) 6
 
 set ::env(GLB_RT_MAXLAYER) 5
 set ::env(GLB_RT_MINLAYER) 2
+set ::env(GLB_RT_OBS) "met5 0 0 1000 1000"
+#set ::env(DIODE_INSERTION_STRATEGY) 0
 
-set ::env(FP_HORIZONTAL_HALO) 60
-set ::env(FP_VERTICAL_HALO) 60
+#set ::env(FP_HORIZONTAL_HALO) 60
+#set ::env(FP_VERTICAL_HALO) 60
+
+set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
 
 set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/microstepper/microstepper_top.v"
