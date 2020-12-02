@@ -13,8 +13,10 @@ set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 40 80"
 set ::env(DESIGN_IS_CORE) 0
 
+set ::env(GLB_RT_MAXLAYER) 5
+set ::env(GLB_RT_MINLAYER) 2
+
 #set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 
 set ::env(PL_BASIC_PLACEMENT) 1
-set ::env(FP_CORE_UTIL) "40"
 set ::env(PL_TARGET_DENSITY) "0.41"

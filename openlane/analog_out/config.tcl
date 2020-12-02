@@ -12,7 +12,10 @@ set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 100 100"
 set ::env(DESIGN_IS_CORE) 0
 set ::env(FP_PDN_CORE_RING) 0
+
 set ::env(GLB_RT_MAXLAYER) 5
+set ::env(GLB_RT_MINLAYER) 2
+
 
 #set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 
