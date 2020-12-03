@@ -39,6 +39,7 @@ set ::env(GLB_RT_ALLOW_CONGESTION) 1
 set ::env(GLB_RT_MAXLAYER) 5
 set ::env(GLB_RT_MINLAYER) 2
 set ::env(GLB_RT_OBS) "met5 0 0 1000 1000"
+set ::env(CLOCK_TREE_SYNTH) 0
 #set ::env(DIODE_INSERTION_STRATEGY) 0
 
 #set ::env(FP_HORIZONTAL_HALO) 60
