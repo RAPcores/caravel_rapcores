@@ -13,7 +13,8 @@ set ::env(DIE_AREA) "0 0 80 80"
 set ::env(DESIGN_IS_CORE) 0
 
 set ::env(GLB_RT_MAXLAYER) 5
-set ::env(GLB_RT_MINLAYER) 2
+set ::env(GLB_RT_OBS) "met5 0 0 80 80"
+set ::env(DIODE_INSERTION_STRATEGY) 3
 
 #set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 
