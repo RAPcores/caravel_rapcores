@@ -1,6 +1,6 @@
 set script_dir [file dirname [file normalize [info script]]]
 
-set ::env(DESIGN_NAME) mytimer_8
+set ::env(DESIGN_NAME) mytimer
 
 
 set ::env(VERILOG_FILES) "\
