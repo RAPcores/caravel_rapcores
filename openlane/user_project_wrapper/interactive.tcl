@@ -10,15 +10,15 @@ init_floorplan
 
 place_io_ol
 
-set ::env(FP_DEF_TEMPATE) $script_dir/../../def/user_project_wrapper_empty.def
+#set ::env(FP_DEF_TEMPLATE) $script_dir/../../def/user_project_wrapper_empty.def
 
-apply_def_template
+#apply_def_template
 
 add_macro_placement mprj 1150 1700 N
 
 manual_macro_placement f
 
-set ::env(_SPACING) 1.6
+set ::env(_SPACING) 1.62
 set ::env(_WIDTH) 3
 
 set power_domains [list {vccd1 vssd1} {vccd2 vssd2} {vdda1 vssa1} {vdda2 vssa2}]
