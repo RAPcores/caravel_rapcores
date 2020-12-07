@@ -21,4 +21,5 @@ set ::env(DIODE_INSERTION_STRATEGY) 3
 #set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 
 set ::env(PL_BASIC_PLACEMENT) 1
-set ::env(PL_TARGET_DENSITY) "0.41"
+set ::env(FP_CORE_UTIL) 60
+set ::env(PL_TARGET_DENSITY) 63
