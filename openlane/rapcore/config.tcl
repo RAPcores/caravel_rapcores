@@ -1,5 +1,8 @@
 set script_dir [file dirname [file normalize [info script]]]
 
+set ::env(_VDD_NET_NAME) vccd1
+set ::env(_GND_NET_NAME) vssd1
+
 set ::env(DESIGN_NAME) rapcore
 
 set ::env(VERILOG_FILES) "\
@@ -10,7 +13,6 @@ set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/rapcore.v"
 
 set ::env(VERILOG_FILES_BLACKBOX) "\
-        $script_dir/../../verilog/rtl/defines.v \
         $script_dir/../../rapcore_caravel_defines.v \
         $script_dir/../../rapcores/src/macro_params.v \
         $script_dir/../../rapcores/src/constants.v \
@@ -35,22 +37,23 @@ set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
 #set ::env(FP_CONTEXT_LEF) $script_dir/../user_project_wrapper_empty/runs/user_project_wrapper_empty/tmp/merged_unpadded.lef
 
 # Some config for hardening
-set ::env(DESIGN_IS_CORE) 0
+set ::env(DESIGN_IS_CORE) 1
 set ::env(GLB_RT_MAXLAYER) 5
 
 # Diodes to fix violations
-set ::env(DIODE_INSERTION_STRATEGY) 3
+#set ::env(DIODE_INSERTION_STRATEGY) 3
 
 # We try to set the die size instead
 #set ::env(PL_BASIC_PLACEMENT) 40
-set ::env(PL_TARGET_DENSITY) 0.2
+#set ::env(PL_BASIC_PLACEMENT) 40
+set ::env(PL_TARGET_DENSITY) 0.41
 
 # Routing
 # -------
 
 # Go fast
 set ::env(ROUTING_CORES) 6
-#set ::env(GLB_RT_ALLOW_CONGESTION) 1
+set ::env(GLB_RT_ALLOW_CONGESTION) 1
 
 # block met5 with obstruction
 set ::env(GLB_RT_OBS) "met5 0 0 2920 3520"

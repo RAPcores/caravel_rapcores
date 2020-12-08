@@ -22,7 +22,7 @@ set ::env(CLOCK_PORT) "clk"
 set ::env(CLOCK_PERIOD) "10"
 
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 380 300"
+set ::env(DIE_AREA) "0 0 400 450"
 set ::env(DESIGN_IS_CORE) 0
 
 #set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
@@ -37,15 +37,15 @@ set ::env(GLB_RT_ALLOW_CONGESTION) 1
 #set ::env(CELL_PAD) 6
 
 set ::env(GLB_RT_MAXLAYER) 5
-set ::env(GLB_RT_MINLAYER) 2
+#set ::env(GLB_RT_MINLAYER) 2
 set ::env(GLB_RT_OBS) "met5 0 0 1000 1000"
 
 ###############################################set ::env(CLOCK_TREE_SYNTH) 0
-set ::env(CLOCK_TREE_SYNTH) 0
+#set ::env(CLOCK_TREE_SYNTH) 0
 #set ::env(DIODE_INSERTION_STRATEGY) 0
 
-#set ::env(FP_HORIZONTAL_HALO) 60
-#set ::env(FP_VERTICAL_HALO) 60
+set ::env(FP_HORIZONTAL_HALO) 60
+set ::env(FP_VERTICAL_HALO) 60
 
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
 
