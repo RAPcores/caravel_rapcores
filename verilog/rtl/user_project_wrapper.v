@@ -63,7 +63,34 @@ module user_project_wrapper #(
     /*--------------------------------------*/
     /* User project is instantiated  here   */
     /*--------------------------------------*/
+    rapcore rapcore0 (
 
+        // IO Pads
+        .CLK(clk),
+        .CHARGEPUMP(io_out[15]),
+        .analog_cmp1(io_in[25]),
+        .analog_out1(io_out[27]),
+        .analog_cmp2(io_in[26]),
+        .analog_out2(io_out[28]),
+        .PHASE_A1(io_out[23]),
+        .PHASE_A2(io_out[19]),
+        .PHASE_B1(io_out[16]),
+        .PHASE_B2(io_out[20]),
+        .PHASE_A1_H(io_out[21]),
+        .PHASE_A2_H(io_out[18]),
+        .PHASE_B1_H(io_out[14]),
+        .PHASE_B2_H(io_out[17]),
+        .ENC_B(io_in[18]),
+        .ENC_A(io_in[19]),
+        .BUFFER_DTR(io_out[12]),
+        .MOVE_DONE(io_out[24]),
+        .HALT(io_in[29]),
+        .SCK(io_in[10]),
+        .CS(io_in[9]),
+        .COPI(io_in[8]),
+        .CIPO(io_out[11])
+    );
+    /*
     user_proj_example mprj (
     `ifdef USE_POWER_PINS
 	.vdda1(vdda1),	// User area 1 3.3V power
@@ -104,6 +131,7 @@ module user_project_wrapper #(
     	.io_out(io_out),
     	.io_oeb(io_oeb)
     );
+    */
 
 endmodule	// user_project_wrapper
 `default_nettype wire
