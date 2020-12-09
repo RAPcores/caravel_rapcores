@@ -1,9 +1,0 @@
-openlane_repo
-pdk_root
-openlane/*/runs/*
-def/*
-gds/*
-lef/*
-mag/*
-spi/*
-verilog/gl/*.v
