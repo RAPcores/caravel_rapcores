@@ -64,7 +64,7 @@ module user_project_wrapper #(
     /* User project is instantiated  here   */
     /*--------------------------------------*/
 
-    top top (
+    rapcore rapcore (
 
         // IO Pads
         .CLK(wb_clk_i),
@@ -99,7 +99,7 @@ module user_project_wrapper #(
 endmodule	// user_project_wrapper
 
 (* blackbox *)
-module top (
+module rapcore (
     input  CLK,
       input  SCK,
       input  CS,
