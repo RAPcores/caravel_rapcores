@@ -1,8 +1,11 @@
 #! /usr/bin/env bash
 
-export PDK_ROOT=`pwd`/pdk_root
-export OPENLANE_ROOT=`pwd`/openlane_repo
+make uncompress
+git submodule init
+git submodule update
+export OPENLANE_ROOT=/home/steve/Ultimachine/openlane
+export PDK_ROOT=/home/steve/Ultimachine/openlane/pdk_root
 echo $PDK_ROOT
 echo $OPENLANE_ROOT
 cd openlane
-make rapcore OPENLANE_IMAGE_NAME=openlane:rc5
+time make rapcore user_project_wrapper OPENLANE_IMAGE_NAME=openlane:rc5
