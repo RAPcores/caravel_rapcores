@@ -6,3 +6,4 @@ gds/*
 lef/*
 mag/*
 spi/*
+verilog/gl/*.v
