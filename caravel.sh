@@ -9,3 +9,5 @@ echo $PDK_ROOT
 echo $OPENLANE_ROOT
 cd openlane
 time make rapcore user_project_wrapper OPENLANE_IMAGE_NAME=openlane:rc5
+cd ../
+make ship
