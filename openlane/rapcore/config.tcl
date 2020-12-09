@@ -25,6 +25,7 @@ set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/rapcore.v"
 set ::env(CLOCK_PORT) "CLK"
 set ::env(CLOCK_PERIOD) "15"
+set ::env(CTS_TOLERANCE) 50
 
 set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 540 540"
@@ -44,6 +45,7 @@ set ::env(DIODE_INSERTION_STRATEGY) 3
 # We try to set the die size instead
 #set ::env(PL_BASIC_PLACEMENT) 40
 #set ::env(PL_TARGET_DENSITY) 0.45
+set ::env(PL_RESIZER_OVERBUFFER) 1
 
 # Routing
 # -------
