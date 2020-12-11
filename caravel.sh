@@ -8,6 +8,6 @@ export PDK_ROOT=/home/steve/Ultimachine/openlane/pdk_root
 echo $PDK_ROOT
 echo $OPENLANE_ROOT
 cd openlane
-time make rapcore user_project_wrapper OPENLANE_IMAGE_NAME=openlane:rc5
-cd ../
-make ship
+time make user_project_wrapper OPENLANE_IMAGE_NAME=openlane:rc5
+#cd ../
+#make ship
