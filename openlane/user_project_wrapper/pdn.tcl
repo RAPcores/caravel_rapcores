@@ -4,13 +4,13 @@ set ::ground_nets $::env(_GND_NET_NAME)
 
 pdngen::specify_grid stdcell {
     name grid
-    blockages "li1 met1 met2 met3 met4"
 	core_ring {
 		met5 {width $::env(_WIDTH) spacing $::env(_SPACING) core_offset $::env(_H_OFFSET)}
 		met4 {width $::env(_WIDTH) spacing $::env(_SPACING) core_offset $::env(_V_OFFSET)}
 	}
 	rails {
 	}
+    blockages "li1 met1 met2 met3 met4"
     straps {
 	    met4 {width $::env(_WIDTH) pitch $::env(_V_PITCH) offset $::env(_V_PDN_OFFSET)}
 	    met5 {width $::env(_WIDTH) pitch $::env(_H_PITCH) offset $::env(_H_PDN_OFFSET)}
@@ -38,7 +38,7 @@ pdngen::specify_grid macro {
     connect {}
 }
 
-set ::halo 10
+set ::halo 0
 
 # POWER or GROUND #Std. cell rails starting with power or ground rails at the bottom of the core area
 set ::rails_start_with "POWER" ;

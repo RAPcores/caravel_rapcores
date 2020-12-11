@@ -27,7 +27,7 @@ set ::env(CLOCK_PORT) "CLK"
 set ::env(CLOCK_PERIOD) "15"
 
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 540 540"
+set ::env(DIE_AREA) "0 0 650 650"
 
 # use the empty wrapper to help pin placement
 set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
@@ -36,14 +36,14 @@ set ::env(FP_CONTEXT_LEF) $script_dir/../user_project_wrapper_empty/runs/user_pr
 
 # Some config for hardening
 set ::env(DESIGN_IS_CORE) 0
-set ::env(GLB_RT_MAXLAYER) 5
+set ::env(GLB_RT_MAXLAYER) 4
 
 # Diodes to fix violations
 set ::env(DIODE_INSERTION_STRATEGY) 3
 
 # We try to set the die size instead
 #set ::env(PL_BASIC_PLACEMENT) 40
-#set ::env(PL_TARGET_DENSITY) 0.45
+set ::env(PL_TARGET_DENSITY) 0.41
 
 # Routing
 # -------
@@ -55,8 +55,11 @@ set ::env(ROUTING_CORES) 6
 # block met5 with obstruction
 set ::env(GLB_RT_OBS) "met5 0 0 800 800"
 
-set ::env(VDD_PIN) vccd1
-set ::env(GND_PIN) vssd1
-
+#set ::env(VDD_PIN) vccd1
+#set ::env(GND_PIN) vssd1
+set ::env(FP_PDN_VOFFSET) "14"
+set ::env(FP_PDN_VPITCH) "180"
+set ::env(FP_PDN_HOFFSET) "14"
+set ::env(FP_PDN_HPITCH) "180"
 
 
