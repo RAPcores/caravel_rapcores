@@ -63,8 +63,7 @@ module user_project_wrapper #(
     /*--------------------------------------*/
     /* User project is instantiated  here   */
     /*--------------------------------------*/
-
-    rapcore rapcore (
+rapcore rapcore1 (
 
         // IO Pads
         .CLK(wb_clk_i),
@@ -95,39 +94,6 @@ module user_project_wrapper #(
         .STEPINPUT(io_in[32]),
         .DIRINPUT(io_in[33])
     );
-
 endmodule	// user_project_wrapper
-
-(* blackbox *)
-module rapcore (
-    input  CLK,
-      input  SCK,
-      input  CS,
-      input  COPI,
-      output CIPO,
-      output CHARGEPUMP,
-      input analog_cmp1,
-      output analog_out1,
-      input analog_cmp2,
-      output analog_out2,
-      output wire PHASE_A1,  // Phase A
-      output wire PHASE_A2,  // Phase A
-      output wire PHASE_B1,  // Phase B
-      output wire PHASE_B2,  // Phase B
-      output wire PHASE_A1_H,  // Phase A
-      output wire PHASE_A2_H,  // Phase A
-      output wire PHASE_B1_H,  // Phase B
-      output wire PHASE_B2_H,  // Phase B
-      input ENC_B,
-      input ENC_A,
-      output BUFFER_DTR,
-      output MOVE_DONE,
-      input HALT,
-      input STEPINPUT,
-      input DIRINPUT,
-      output STEPOUTPUT,
-      output DIROUTPUT
-);
-endmodule
 
 `default_nettype wire

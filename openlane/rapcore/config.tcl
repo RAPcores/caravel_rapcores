@@ -26,6 +26,17 @@ set ::env(VERILOG_FILES) "\
 set ::env(CLOCK_PORT) "CLK"
 set ::env(CLOCK_PERIOD) "15"
 
+set ::env(VERILOG_FILES_BLACKBOX) "\
+	$script_dir/../../rapcore_caravel_defines.v \
+	$script_dir/../../verilog/rtl/defines.v \
+	$script_dir/../../rapcores/src/rapcore.v"
+
+set ::env(EXTRA_LEFS) "\
+	$script_dir/../../lef/rapcore.lef"
+
+set ::env(EXTRA_GDS_FILES) "\
+	$script_dir/../../gds/rapcore.gds"
+
 set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 650 650"
 
