@@ -64,6 +64,8 @@ module user_project_wrapper #(
     /* User project is instantiated  here   */
     /*--------------------------------------*/
 
+    //assign io_oeb = 38'b1111100110011001011111111111;
+
     rapcore rapcore1 (
 
         // IO Pads

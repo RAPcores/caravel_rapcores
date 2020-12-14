@@ -5,6 +5,11 @@ set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 set ::env(FP_DEF_TEMPLATE) $script_dir/../../def/user_project_wrapper_empty.def
 
 #set ::env(PDN_CFG) $script_dir/pdn.tcl
+
+set ::env(SYNTH_NO_FLAT) 1
+set ::env(SYNTH_SCRIPT) $script_dir/synth.tcl
+#set ::env(SYNTH_STRATEGY) 3
+
 set ::env(FP_PDN_CORE_RING) 1
 set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 2920 3520"
@@ -38,7 +43,6 @@ set ::env(MAGIC_WRITE_FULL_LEF) 1
 
 set ::env(LVS_INSERT_POWER_PINS) 1
 
-#set ::env(SYNTH_STRATEGY) 3
 #set ::env(FP_CORE_UTIL) 15
 #set ::env(CELL_PAD) 4
 set ::env(PL_TARGET_DENSITY) 0.02
@@ -48,8 +52,7 @@ set ::env(PL_TARGET_DENSITY) 0.02
 #set ::env(GLB_RT_TILES) 14
 #set ::env(DIODE_INSERTION_STRATEGY) 3
 #set ::env(GLB_RT_MAX_DIODE_INS_ITERS) 500
-#set ::env(PL_RESIZER_OVERBUFFER) 1
-
+set ::env(PL_RESIZER_OVERBUFFER) 1
 
 set ::env(VERILOG_FILES) "\
     $script_dir/../../verilog/rtl/defines.v \
