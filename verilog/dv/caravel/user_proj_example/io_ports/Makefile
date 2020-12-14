@@ -2,6 +2,7 @@ FIRMWARE_PATH = ../..
 RTL_PATH = ../../../../rtl
 IP_PATH = ../../../../ip
 BEHAVIOURAL_MODELS = ../../ 
+RAPCORES_PATH = ../../../../../rapcores
 
 GCC_PATH?=//opt/riscv32/bin
 GCC_PREFIX?=riscv32-unknown-elf
@@ -17,7 +18,7 @@ hex:  ${PATTERN:=.hex}
 
 %.vvp: %_tb.v %.hex
 	iverilog -DFUNCTIONAL -DSIM -I $(BEHAVIOURAL_MODELS) \
-	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) \
+	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) -I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src \
 	-o $@ $<
 
 %.vcd: %.vvp

@@ -2,27 +2,27 @@
 
 `timescale 1 ns / 1 ps
 
+`include "defines.v"
+`include "rapcore_caravel_defines.v"
+`include "macro_params.v"
+`include "constants.v"
+`include "quad_enc.v"
+`include "spi.v"
+`include "dda_timer.v"
+`include "spi_state_machine.v"
+`include "microstepper/chargepump.v"
+`include "microstepper/microstepper_control.v"
+`include "microstepper/mytimer_8.v"
+`include "microstepper/mytimer_10.v"
+`include "microstepper/microstep_counter.v"
+`include "microstepper/cosine.v"
+`include "microstepper/analog_out.v"
+`include "microstepper/microstepper_top.v"
+`include "rapcore.v"
+//`include "rapcore_caravel.v"
+
 `include "caravel.v"
 `include "spiflash.v"
-
-`include "../../verilog/rtl/defines.v"
-`include "../../rapcore_caravel_defines.v"
-`include "../../rapcores/src/macro_params.v"
-`include "../../rapcores/src/constants.v"
-`include "../../rapcores/src/quad_enc.v"
-`include "../../rapcores/src/spi.v"
-`include "../../rapcores/src/dda_timer.v"
-`include "../../rapcores/src/spi_state_machine.v"
-`include "../../rapcores/src/microstepper/chargepump.v"
-`include "../../rapcores/src/microstepper/microstepper_control.v"
-`include "../../rapcores/src/microstepper/mytimer_8.v"
-`include "../../rapcores/src/microstepper/mytimer_10.v"
-`include "../../rapcores/src/microstepper/microstep_counter.v"
-`include "../../rapcores/src/microstepper/cosine.v"
-`include "../../rapcores/src/microstepper/analog_out.v"
-`include "../../rapcores/src/microstepper/microstepper_top.v"
-`include "../../rapcores/src/rapcore.v"
-//`include "../../verilog/rtl/rapcore_caravel.v"
 
 module io_ports_tb;
 	reg clock;
