@@ -5,6 +5,7 @@
 `include "caravel.v"
 `include "spiflash.v"
 
+`include "../../verilog/rtl/defines.v"
 `include "../../rapcore_caravel_defines.v"
 `include "../../rapcores/src/macro_params.v"
 `include "../../rapcores/src/constants.v"
