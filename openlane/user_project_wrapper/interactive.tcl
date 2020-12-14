@@ -14,7 +14,7 @@ place_io_ol
 
 #apply_def_template
 
-add_macro_placement rapcore 1151 1700 N
+add_macro_placement rapcores0 1151 1700 N
 
 manual_macro_placement f
 

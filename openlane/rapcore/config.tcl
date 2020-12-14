@@ -1,6 +1,6 @@
 set script_dir [file dirname [file normalize [info script]]]
 
-set ::env(DESIGN_NAME) rapcore
+set ::env(DESIGN_NAME) rapcores
 
 set ::env(VERILOG_FILES) "\
         $script_dir/../../verilog/rtl/defines.v \
@@ -22,28 +22,13 @@ set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/microstepper/mytimer.v \
         $script_dir/../../rapcores/src/microstepper/mytimer_8.v \
         $script_dir/../../rapcores/src/microstepper/mytimer_10.v \
-        $script_dir/../../rapcores/src/rapcore.v"
-set ::env(CLOCK_PORT) "CLK"
+        $script_dir/../../rapcores/src/rapcore.v \
+        $script_dir/../../verilog/rtl/rapcore_caravel.v"
+set ::env(CLOCK_PORT) "wb_clk_i"
 set ::env(CLOCK_PERIOD) "15"
-
-set ::env(VERILOG_FILES_BLACKBOX) "\
-	$script_dir/../../rapcore_caravel_defines.v \
-	$script_dir/../../verilog/rtl/defines.v \
-	$script_dir/../../rapcores/src/rapcore.v"
-
-set ::env(EXTRA_LEFS) "\
-	$script_dir/../../lef/rapcore.lef"
-
-set ::env(EXTRA_GDS_FILES) "\
-	$script_dir/../../gds/rapcore.gds"
 
 set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 650 650"
-
-# use the empty wrapper to help pin placement
-set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
-set ::env(FP_CONTEXT_DEF) $script_dir/../user_project_wrapper_empty/runs/user_project_wrapper_empty/tmp/floorplan/ioPlacer.def
-set ::env(FP_CONTEXT_LEF) $script_dir/../user_project_wrapper_empty/runs/user_project_wrapper_empty/tmp/merged_unpadded.lef
 
 # Some config for hardening
 set ::env(DESIGN_IS_CORE) 0
