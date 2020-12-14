@@ -5,6 +5,24 @@
 `include "caravel.v"
 `include "spiflash.v"
 
+`include "../../rapcore_caravel_defines.v"
+`include "../../rapcores/src/macro_params.v"
+`include "../../rapcores/src/constants.v"
+`include "../../rapcores/src/quad_enc.v"
+`include "../../rapcores/src/spi.v"
+`include "../../rapcores/src/dda_timer.v"
+`include "../../rapcores/src/spi_state_machine.v"
+`include "../../rapcores/src/microstepper/chargepump.v"
+`include "../../rapcores/src/microstepper/microstepper_control.v"
+`include "../../rapcores/src/microstepper/mytimer_8.v"
+`include "../../rapcores/src/microstepper/mytimer_10.v"
+`include "../../rapcores/src/microstepper/microstep_counter.v"
+`include "../../rapcores/src/microstepper/cosine.v"
+`include "../../rapcores/src/microstepper/analog_out.v"
+`include "../../rapcores/src/microstepper/microstepper_top.v"
+`include "../../rapcores/src/rapcore.v"
+//`include "../../verilog/rtl/rapcore_caravel.v"
+
 module io_ports_tb;
 	reg clock;
     	reg RSTB;
