@@ -23,9 +23,6 @@ set ::env(FP_IO_HTHICKNESS_MULT) 4
 set ::env(CLOCK_PORT) "wb_clk_i"
 set ::env(CLOCK_PERIOD) "15"
 
-set ::env(CLOCK_PORT) "user_clock2"
-set ::env(CLOCK_NET) "mprj.clk"
-
 set ::env(CLOCK_PERIOD) "10"
 
 set ::env(PL_OPENPHYSYN_OPTIMIZATIONS) 0
@@ -53,4 +50,3 @@ set ::env(EXTRA_GDS_FILES) "\
 	$script_dir/../../gds/rapcore.gds"
 
 #set ::env(GLB_RT_OBS) "met4 1150 1700 1690 2240"
-

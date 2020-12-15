@@ -51,11 +51,13 @@ set ::env(ROUTING_CORES) 6
 # block met5 with obstruction
 set ::env(GLB_RT_OBS) "met5 0 0 800 800"
 
-#set ::env(VDD_PIN) vccd1
-#set ::env(GND_PIN) vssd1
+set ::env(FP_CONTEXT_LEF) "$script_dir/../../lef/user_project_wrapper_empty.lef"
+
+set ::env(VDD_PIN) vccd1
+set ::env(GND_PIN) vssd1
+set ::env(_VDD_NET_NAME) vccd1
+set ::env(_GND_NET_NAME) vssd1
 set ::env(FP_PDN_VOFFSET) "14"
 set ::env(FP_PDN_VPITCH) "180"
 set ::env(FP_PDN_HOFFSET) "14"
 set ::env(FP_PDN_HPITCH) "180"
-
-
