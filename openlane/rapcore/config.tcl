@@ -1,6 +1,6 @@
 set script_dir [file dirname [file normalize [info script]]]
 
-set ::env(DESIGN_NAME) rapcore
+set ::env(DESIGN_NAME) rapcores
 
 set ::env(VERILOG_FILES) "\
         $script_dir/../../verilog/rtl/defines.v \
@@ -22,8 +22,10 @@ set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/microstepper/mytimer.v \
         $script_dir/../../rapcores/src/microstepper/mytimer_8.v \
         $script_dir/../../rapcores/src/microstepper/mytimer_10.v \
-        $script_dir/../../rapcores/src/rapcore.v"
-set ::env(CLOCK_PORT) "CLK"
+        $script_dir/../../rapcores/src/rapcore.v \
+        $script_dir/../../verilog/rtl/rapcore_caravel.v"
+
+set ::env(CLOCK_PORT) "wb_clk_i"
 set ::env(CLOCK_PERIOD) "15"
 
 set ::env(FP_SIZING) absolute
