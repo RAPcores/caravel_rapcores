@@ -118,14 +118,14 @@ module rapcores #(
     assign io_oeb[32] = 1'b1;    // STEPINPUT
     assign io_oeb[33] = 1'b1;    // DIRINPUT
     // unused
-    assign io_oeb[0] = 1'b1;    // JTAG I/O
-    assign io_oeb[1] = 1'b1;    // SDO
-    assign io_oeb[2] = 1'b1;    // SDI
-    assign io_oeb[3] = 1'b1;    // CSB
-    assign io_oeb[4] = 1'b1;    // SCK
-    assign io_oeb[5] = 1'b1;    // Rx
-    assign io_oeb[6] = 1'b1;    // Tx
-    assign io_oeb[7] = 1'b1;    // IRQ
+    assign io_oeb[0] = 1'b0;    // JTAG I/O
+    assign io_oeb[1] = 1'b0;    // SDO
+    assign io_oeb[2] = 1'b0;    // SDI
+    assign io_oeb[3] = 1'b0;    // CSB
+    assign io_oeb[4] = 1'b0;    // SCK
+    assign io_oeb[5] = 1'b0;    // Rx
+    assign io_oeb[6] = 1'b0;    // Tx
+    assign io_oeb[7] = 1'b0;    // IRQ
     assign io_oeb[13] = 1'b1;   
     assign io_oeb[22] = 1'b1;
     assign io_oeb[34] = 1'b1;
@@ -133,6 +133,17 @@ module rapcores #(
     assign io_oeb[36] = 1'b1;
     assign io_oeb[37] = 1'b1;
 
+
+		wire resetn;
+    reg [12:0] resetn_counter = 0;
+		assign resetn = &resetn_counter;
+
+		always @(posedge wb_clk_i) begin
+		  if (!resetn && !wb_rst_i) resetn_counter <= resetn_counter +1;
+		end
+
+    // IO
+    assign io_out[7:0] = resetn_counter[7:0]; //count;
 
     rapcore rapcore0 (
 
