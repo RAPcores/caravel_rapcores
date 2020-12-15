@@ -1,11 +1,15 @@
 FIRMWARE_PATH = ../..
+VERILOG_PATH = ../../../..
 RTL_PATH = ../../../../rtl
 IP_PATH = ../../../../ip
 BEHAVIOURAL_MODELS = ../../ 
+RAPCORES_PATH = ../../../../../rapcores
 
-GCC_PATH?=/ef/apps/bin
+GCC_PATH?=//opt/riscv32/bin
 GCC_PREFIX?=riscv32-unknown-elf
-PDK_PATH?=/ef/tech/SW/sky130A
+PDK_PATH?=$(PDK_ROOT)/sky130A
+
+SIM?=RTL
 
 .SUFFIXES:
 
@@ -16,9 +20,16 @@ all:  ${PATTERN:=.vcd}
 hex:  ${PATTERN:=.hex}
 
 %.vvp: %_tb.v %.hex
-	iverilog -DFUNCTIONAL -I $(BEHAVIOURAL_MODELS) \
-	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) \
+ifeq ($(SIM),RTL)
+	iverilog -DFUNCTIONAL -DSIM -I $(BEHAVIOURAL_MODELS) \
+	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) -I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src \
 	-o $@ $<
+else 
+	iverilog -DPROJ_GL -DFUNCTIONAL -DSIM -I $(BEHAVIOURAL_MODELS) \
+	-I $(PDK_PATH) -I $(IP_PATH) -I $(VERILOG_PATH) -I $(RTL_PATH) -I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src \
+	-o $@ $<
+endif
+
 
 %.vcd: %.vvp
 	vvp $<
