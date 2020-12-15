@@ -127,11 +127,11 @@ module rapcores #(
     assign io_oeb[6] = 1'b0;    // Tx
     assign io_oeb[7] = 1'b0;    // IRQ
     assign io_oeb[13] = 1'b1;   
-    assign io_oeb[22] = 1'b1;
-    assign io_oeb[34] = 1'b1;
-    assign io_oeb[35] = 1'b1;
-    assign io_oeb[36] = 1'b1;
-    assign io_oeb[37] = 1'b1;
+    assign io_oeb[8] = 1'b1;
+    assign io_oeb[9] = 1'b1;
+    assign io_oeb[10] = 1'b1;
+    assign io_oeb[11] = 1'b1;
+    assign io_oeb[12] = 1'b1;
 
 
 		wire resetn;
@@ -164,13 +164,13 @@ module rapcores #(
         .PHASE_B2_H(io_out[17]),
         .ENC_B(io_in[18]),
         .ENC_A(io_in[19]),
-        .BUFFER_DTR(io_out[12]),
+        .BUFFER_DTR(io_out[37]),
         .MOVE_DONE(io_out[24]),
         .HALT(io_in[29]),
-        .SCK(io_in[10]),
-        .CS(io_in[9]),
-        .COPI(io_in[8]),
-        .CIPO(io_out[11]),
+        .SCK(io_in[35]),
+        .CS(io_in[34]),
+        .COPI(io_in[22]),
+        .CIPO(io_out[36]),
         .STEPOUTPUT(io_out[30]),
         .DIROUTPUT(io_out[31]),
         .STEPINPUT(io_in[32]),
