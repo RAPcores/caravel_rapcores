@@ -179,7 +179,9 @@ module rapcores #(
         .STEPOUTPUT(io_out[30]),
         .DIROUTPUT(io_out[31]),
         .STEPINPUT(io_in[32]),
-        .DIRINPUT(io_in[33])
+        .DIRINPUT(io_in[33]),
+        .enable_in( la_data_in[64] ),
+        .enable_oeb( la_oen[64] )
     );
 
 endmodule
