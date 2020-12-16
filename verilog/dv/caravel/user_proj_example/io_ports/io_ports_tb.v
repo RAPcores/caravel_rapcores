@@ -49,12 +49,10 @@ module io_ports_tb;
 	// simulation.  Normally this would be a slow clock and the digital PLL
 	// would be the fast clock.
 
-	always #5 clock <= (clock === 1'b0);
-	always #20 step <= !step;
+	always #12.5 clock <= (clock === 1'b0);
 
 	initial begin
 		clock = 0;
-		step = 0;
 	end
 
 	initial begin
@@ -127,31 +125,6 @@ module io_ports_tb;
 	wire USER_VDD1V8 = power4;
 	wire VSS = 1'b0;
 
-	caravel uut (
-		.vddio	  (VDD3V3),
-		.vssio	  (VSS),
-		.vdda	  (VDD3V3),
-		.vssa	  (VSS),
-		.vccd	  (VDD1V8),
-		.vssd	  (VSS),
-		.vdda1    (USER_VDD3V3),
-		.vdda2    (USER_VDD3V3),
-		.vssa1	  (VSS),
-		.vssa2	  (VSS),
-		.vccd1	  (USER_VDD1V8),
-		.vccd2	  (USER_VDD1V8),
-		.vssd1	  (VSS),
-		.vssd2	  (VSS),
-		.clock	  (clock),
-		.gpio     (gpio),
-        	.mprj_io  (mprj_io),
-		.flash_csb(flash_csb),
-		.flash_clk(flash_clk),
-		.flash_io0(flash_io0),
-		.flash_io1(flash_io1),
-		.resetb	  (RSTB)
-	);
-
 
     reg                 step;
     reg                 dir;
@@ -179,18 +152,6 @@ module io_ports_tb;
     wire            phase_b2_h;
 	wire 			resetn;
 
-
-	spiflash #(
-		.FILENAME("io_ports.hex")
-	) spiflash (
-		.csb(flash_csb),
-		.clk(flash_clk),
-		.io0(flash_io0),
-		.io1(flash_io1),
-		.io2(),			// not used
-		.io3()			// not used
-	);
-
 //	assign CHARGEPUMP		= mprj_io[15];
 	assign analog_out1		= mprj_io[27];
 	assign analog_out2		= mprj_io[28];
@@ -217,7 +178,7 @@ module io_ports_tb;
 //	assign mprj_io[22]		= COPI;
 	assign mprj_io[32]		= step;
 	assign mprj_io[33]		= dir;
-	assign resetn = ~RSTB;
+	assign resetn = RSTB;
 
     always @(posedge clock) begin
         if (!resetn) begin
@@ -253,6 +214,43 @@ module io_ports_tb;
                 dir <= 0;
         end
     end
+
+	caravel uut (
+		.vddio	  (VDD3V3),
+		.vssio	  (VSS),
+		.vdda	  (VDD3V3),
+		.vssa	  (VSS),
+		.vccd	  (VDD1V8),
+		.vssd	  (VSS),
+		.vdda1    (USER_VDD3V3),
+		.vdda2    (USER_VDD3V3),
+		.vssa1	  (VSS),
+		.vssa2	  (VSS),
+		.vccd1	  (USER_VDD1V8),
+		.vccd2	  (USER_VDD1V8),
+		.vssd1	  (VSS),
+		.vssd2	  (VSS),
+		.clock	  (clock),
+		.gpio     (gpio),
+        	.mprj_io  (mprj_io),
+		.flash_csb(flash_csb),
+		.flash_clk(flash_clk),
+		.flash_io0(flash_io0),
+		.flash_io1(flash_io1),
+		.resetb	  (RSTB)
+	);
+
+
+	spiflash #(
+		.FILENAME("io_ports.hex")
+	) spiflash (
+		.csb(flash_csb),
+		.clk(flash_clk),
+		.io0(flash_io0),
+		.io1(flash_io1),
+		.io2(),			// not used
+		.io3()			// not used
+	);
 
     pwm_duty duty1(
         .clk(clock),

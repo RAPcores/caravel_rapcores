@@ -20,7 +20,7 @@
  *-------------------------------------------------------------
  */
 
-module rapcores #(
+module rapcore_caravel #(
     parameter BITS = 32
 )(
 `ifdef USE_POWER_PINS
@@ -87,8 +87,8 @@ module rapcores #(
     // Assuming LA probes [63:32] are for controlling the count register
     assign la_write = ~la_oen[63:32] & ~{BITS{valid}};
     // Assuming LA probes [65:64] are for controlling the count clk & reset
-    assign clk = wb_clk_i;
-    assign rst = (~la_oen[65]) ? la_data_in[65]: wb_rst_i;
+    assign clk = (~la_oen[64]) ? la_data_in[64]: wb_clk_i;
+    assign rst = ~la_oen[65] && la_data_in[65] && ~wb_rst_i;
 
     // GPIO output enable (0 = output, 1 = input)
     assign io_oeb[15] = 1'b0;    // CHARGEPUMP
@@ -136,19 +136,20 @@ module rapcores #(
 
 		wire resetn;
     reg [12:0] resetn_counter = 0;
-		assign resetn = &resetn_counter;
+		assign resetn = &resetn_counter && rst;
 
 		always @(posedge wb_clk_i) begin
-		  if (!resetn && !wb_rst_i) resetn_counter <= resetn_counter +1;
+		  if (!resetn && !wb_rst_i && rst) resetn_counter <= resetn_counter +1;
 		end
 
     // IO
-    assign io_out[7:0] = resetn_counter[7:0]; //count;
+    assign io_out[7:0] = resetn_counter[12:5]; //count;
 
     rapcore rapcore0 (
 
         // IO Pads
         .CLK(wb_clk_i),
+        .resetn_in(resetn),
         .CHARGEPUMP(io_out[15]),
         .analog_cmp1(io_in[25]),
         .analog_out1(io_out[27]),
