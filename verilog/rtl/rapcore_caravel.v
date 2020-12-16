@@ -133,6 +133,7 @@ module rapcores #(
     assign io_oeb[11] = 1'b1;
     assign io_oeb[12] = 1'b1;
 
+/*
 
 		wire resetn;
     reg [12:0] resetn_counter = 0;
@@ -144,11 +145,15 @@ module rapcores #(
 
     // IO
     assign io_out[7:0] = resetn_counter[7:0]; //count;
+*/
+
+    wire resetn = (~la_oen[65]) ? la_data_in[65]: 1'b0;
 
     rapcore rapcore0 (
 
         // IO Pads
         .CLK(wb_clk_i),
+        .resetn(resetn),
         .CHARGEPUMP(io_out[15]),
         .analog_cmp1(io_in[25]),
         .analog_out1(io_out[27]),
