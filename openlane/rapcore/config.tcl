@@ -54,14 +54,21 @@ set ::env(PL_TARGET_DENSITY) 0.41
 set ::env(ROUTING_CORES) 6
 #set ::env(GLB_RT_ALLOW_CONGESTION) 1
 
+set ::env(VDD_NETS) [list {vccd1} {vccd2} {vdda1} {vdda2}]
+set ::env(GND_NETS) [list {vssd1} {vssd2} {vssa1} {vssa2}]
+
 # block met5 with obstruction
 set ::env(GLB_RT_OBS) "met5 0 0 800 800"
 
+
+set ::env(FP_PDN_LOWER_LAYER) met4
+set ::env(FP_PDN_UPPER_LAYER) met5
+
 #set ::env(VDD_PIN) vccd1
 #set ::env(GND_PIN) vssd1
-set ::env(FP_PDN_VOFFSET) "14"
-set ::env(FP_PDN_VPITCH) "180"
-set ::env(FP_PDN_HOFFSET) "14"
-set ::env(FP_PDN_HPITCH) "180"
+#set ::env(FP_PDN_VOFFSET) "14"
+#set ::env(FP_PDN_VPITCH) "180"
+#set ::env(FP_PDN_HOFFSET) "14"
+#set ::env(FP_PDN_HPITCH) "180"
 
 
