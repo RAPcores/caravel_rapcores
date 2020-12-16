@@ -58,6 +58,7 @@ module rapcore_caravel #(
 );
     wire clk;
     wire rst;
+    wire enable;
 
     wire [`MPRJ_IO_PADS-1:0] io_in;
     wire [`MPRJ_IO_PADS-1:0] io_out;
@@ -87,8 +88,9 @@ module rapcore_caravel #(
     // Assuming LA probes [63:32] are for controlling the count register
     assign la_write = ~la_oen[63:32] & ~{BITS{valid}};
     // Assuming LA probes [65:64] are for controlling the count clk & reset
-    assign clk = (~la_oen[64]) ? la_data_in[64]: wb_clk_i;
+    assign clk = wb_clk_i;
     assign rst = ~la_oen[65] && la_data_in[65] && ~wb_rst_i;
+    assign enable = ~la_oen[64] && la_data_in[64];
 
     // GPIO output enable (0 = output, 1 = input)
     assign io_oeb[15] = 1'b0;    // CHARGEPUMP
@@ -104,8 +106,8 @@ module rapcore_caravel #(
     assign io_oeb[18] = 1'b0;    // PHASE_A2_H
     assign io_oeb[14] = 1'b0;    // PHASE_B1_H
     assign io_oeb[17] = 1'b0;    // PHASE_B2_H
-    assign io_oeb[18] = 1'b1;    // ENC_B
-    assign io_oeb[19] = 1'b1;    // ENC_A
+    assign io_oeb[12] = 1'b0;    // ENC_B
+    assign io_oeb[13] = 1'b0;    // ENC_A
     assign io_oeb[37] = 1'b0;    // BUFFER_DTR
     assign io_oeb[24] = 1'b0;    // MOVE_DONE
     assign io_oeb[29] = 1'b1;    // HALT
@@ -175,7 +177,8 @@ module rapcore_caravel #(
         .STEPOUTPUT(io_out[30]),
         .DIROUTPUT(io_out[31]),
         .STEPINPUT(io_in[32]),
-        .DIRINPUT(io_in[33])
+        .DIRINPUT(io_in[33]),
+        .ENINPUT(enable)
     );
 
 endmodule

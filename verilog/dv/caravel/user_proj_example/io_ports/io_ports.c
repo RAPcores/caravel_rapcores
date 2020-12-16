@@ -32,14 +32,16 @@ void main()
 	reg_mprj_io_3 =  GPIO_MODE_USER_STD_OUTPUT;
 	reg_mprj_io_4 =  GPIO_MODE_USER_STD_OUTPUT;
 	reg_mprj_io_5 =  GPIO_MODE_USER_STD_OUTPUT;
-	reg_mprj_io_6 =  GPIO_MODE_USER_STD_OUTPUT;
-	reg_mprj_io_7 =  GPIO_MODE_USER_STD_OUTPUT;
+	reg_mprj_io_6 =  GPIO_MODE_USER_STD_INPUT_NOPULL;
+	reg_mprj_io_7 =  GPIO_MODE_USER_STD_INPUT_NOPULL;
+	reg_mprj_io_15 =  GPIO_MODE_USER_STD_OUTPUT;
+	reg_mprj_io_16 =  GPIO_MODE_USER_STD_OUTPUT;
 	reg_mprj_io_14 =  GPIO_MODE_USER_STD_OUTPUT;
 	reg_mprj_io_15 =  GPIO_MODE_USER_STD_OUTPUT;
 	reg_mprj_io_16 =  GPIO_MODE_USER_STD_OUTPUT;
 	reg_mprj_io_17 =  GPIO_MODE_USER_STD_OUTPUT;
-	reg_mprj_io_18 =  GPIO_MODE_USER_STD_INPUT_NOPULL;
-	reg_mprj_io_19 =  GPIO_MODE_USER_STD_INPUT_NOPULL;
+	reg_mprj_io_18 =  GPIO_MODE_USER_STD_OUTPUT;
+	reg_mprj_io_19 =  GPIO_MODE_USER_STD_OUTPUT;
 	reg_mprj_io_20 =  GPIO_MODE_USER_STD_OUTPUT;
 	reg_mprj_io_21 =  GPIO_MODE_USER_STD_OUTPUT;
 	reg_mprj_io_22 =  GPIO_MODE_USER_STD_INPUT_NOPULL;
@@ -71,7 +73,7 @@ void main()
 	reg_la3_ena = 0xFFFFFFFF;    // [127:96]
 
 	// Set Counter value to zero through LA probes [63:32]
-	reg_la2_data = 0x00000002;
+	reg_la2_data = 0x00000003;
 
 }
 
