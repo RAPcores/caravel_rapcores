@@ -135,7 +135,7 @@ module rapcore_caravel #(
 
 
 		wire resetn;
-    reg [12:0] resetn_counter = 0;
+    reg [13:0] resetn_counter = 0;
 		assign resetn = &resetn_counter && rst;
 
 		always @(posedge wb_clk_i) begin
@@ -143,7 +143,7 @@ module rapcore_caravel #(
 		end
 
     // IO
-    assign io_out[7:0] = resetn_counter[12:5]; //count;
+    assign io_out[7:0] = resetn_counter[13:6]; //count;
 
     rapcore rapcore0 (
 
