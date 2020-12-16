@@ -49,10 +49,12 @@ module io_ports_tb;
 	// simulation.  Normally this would be a slow clock and the digital PLL
 	// would be the fast clock.
 
-	always #12.5 clock <= (clock === 1'b0);
+	always #5 clock <= (clock === 1'b0);
+	always #20 step <= !step;
 
 	initial begin
 		clock = 0;
+		step = 0;
 	end
 
 	initial begin
@@ -111,7 +113,7 @@ module io_ports_tb;
 	end
 
 	always @(mprj_io) begin
-		#1 $display("MPRJ-IO state = %b ", mprj_io[7:0]);
+		#1 $display("MPRJ-IO state = %b ", mprj_io[37:0]);
 	end
 
 	wire flash_csb;
@@ -223,7 +225,7 @@ module io_ports_tb;
             analog_cmp1 <= 1;
             analog_cmp2 <= 1;
             step <= 1;
-            step_clock = 0;
+            //step_clock = 0;
         end
         else begin
             cnt <= cnt + 1;
@@ -240,8 +242,8 @@ module io_ports_tb;
             else begin
                 current_abs2 = current2;
             end
-            step_clock <= step_clock + 1;
-            step <= step_clock[10];
+            //step_clock <= step_clock + 1;
+            //step <= step_clock[1]; //10
             analog_cmp1 <= (current_abs1[11:0] >= target_current1[11:0]); // compare unsigned
             analog_cmp2 <= (current_abs2[11:0] >= target_current2[11:0]);
             if (cnt <= 20'h4CA9) begin
