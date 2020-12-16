@@ -22,7 +22,7 @@ hex:  ${PATTERN:=.hex}
 %.vvp: %_tb.v %.hex
 ifeq ($(SIM),RTL)
 	iverilog -DFUNCTIONAL -DSIM -I $(BEHAVIOURAL_MODELS) \
-	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) -I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src \
+	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) -I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src -I $(RAPCORES_PATH)/testbench \
 	-o $@ $<
 else 
 	iverilog -DPROJ_GL -DFUNCTIONAL -DSIM -I $(BEHAVIOURAL_MODELS) \
