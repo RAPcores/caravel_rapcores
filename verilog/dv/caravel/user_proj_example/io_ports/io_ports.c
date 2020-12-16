@@ -63,8 +63,13 @@ void main()
         reg_mprj_xfer = 1;
         while (reg_mprj_xfer == 1);
 
-        //release nReset on 65. 
-        reg_la2_ena = ~0x2;    // [95:64]
+        //release nReset on 65. Enable as output but disabled;
+        reg_la2_ena = ~0x3;    // [95:64]
         reg_la2_data = 0x2;    // [95:64]
+
+	for(int i = 0; i< 5; i++);
+
+        reg_la2_data = 0x3; //Enable
+
 }
 
