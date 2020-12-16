@@ -53,7 +53,7 @@ set ::env(VERILOG_FILES_BLACKBOX) "\
     $script_dir/../../rapcore_caravel_defines.v \
     $script_dir/../../rapcores/src/macro_params.v \
     $script_dir/../../rapcores/src/constants.v \
-    $script_dir/../../rapcores/src/rapcore.v"
+    $script_dir/../../verilog/rtl/rapcore_caravel.v"
 
 set ::env(EXTRA_LEFS) "\
 	$script_dir/../../lef/rapcore.lef"

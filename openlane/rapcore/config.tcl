@@ -1,6 +1,6 @@
 set script_dir [file dirname [file normalize [info script]]]
 
-set ::env(DESIGN_NAME) rapcore
+set ::env(DESIGN_NAME) rapcores
 
 set ::env(VERILOG_FILES) "\
         $script_dir/../../verilog/rtl/defines.v \
@@ -22,9 +22,10 @@ set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/microstepper/mytimer.v \
         $script_dir/../../rapcores/src/microstepper/mytimer_8.v \
         $script_dir/../../rapcores/src/microstepper/mytimer_10.v \
-        $script_dir/../../rapcores/src/rapcore.v"
-set ::env(CLOCK_PORT) "CLK"
-set ::env(CLOCK_NET) "CLK"
+        $script_dir/../../rapcores/src/rapcore.v \
+        $script_dir/../../verilog/rtl/rapcore_caravel.v"
+
+set ::env(CLOCK_PORT) "wb_clk_i"
 set ::env(CLOCK_PERIOD) "15"
 
 set ::env(FP_SIZING) absolute
@@ -52,11 +53,25 @@ set ::env(CELL_PAD) 0
 set ::env(ROUTING_CORES) 6
 #set ::env(GLB_RT_ALLOW_CONGESTION) 1
 
+set ::env(VDD_NETS) [list {vccd1} {vccd2} {vdda1} {vdda2}]
+set ::env(GND_NETS) [list {vssd1} {vssd2} {vssa1} {vssa2}]
+
 # block met5 with obstruction
 set ::env(GLB_RT_OBS) "met5 0 0 800 800"
 
 set ::env(VDD_NETS) [list {vccd1} {vccd2} {vdda1} {vdda2}]
 set ::env(GND_NETS) [list {vssd1} {vssd2} {vssa1} {vssa2}]
+
+set ::env(FP_PDN_LOWER_LAYER) met4
+set ::env(FP_PDN_UPPER_LAYER) met5
+
+#set ::env(VDD_PIN) vccd1
+#set ::env(GND_PIN) vssd1
+#set ::env(FP_PDN_VOFFSET) "14"
+#set ::env(FP_PDN_VPITCH) "180"
+#set ::env(FP_PDN_HOFFSET) "14"
+#set ::env(FP_PDN_HPITCH) "180"
+
 
 # If you're going to use multiple power domains, then keep this disabled.
 set ::env(RUN_CVC) 0
