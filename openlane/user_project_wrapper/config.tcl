@@ -50,16 +50,13 @@ set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro.cfg
 ### Black-box verilog and views
 set ::env(VERILOG_FILES_BLACKBOX) "\
     $script_dir/../../verilog/rtl/defines.v \
-    $script_dir/../../rapcore_caravel_defines.v \
-    $script_dir/../../rapcores/src/macro_params.v \
-    $script_dir/../../rapcores/src/constants.v \
-    $script_dir/../../verilog/rtl/rapcore_caravel.v"
+    $script_dir/../../verilog/rtl/rapcores.v"
 
 set ::env(EXTRA_LEFS) "\
-	$script_dir/../../lef/rapcore.lef"
+	$script_dir/../../lef/rapcores.lef"
 
 set ::env(EXTRA_GDS_FILES) "\
-	$script_dir/../../gds/rapcore.gds"
+	$script_dir/../../gds/rapcores.gds"
 
 
 # The following is because there are no std cells in the example wrapper project.

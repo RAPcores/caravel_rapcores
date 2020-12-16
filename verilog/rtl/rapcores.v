@@ -20,9 +20,9 @@
  *-------------------------------------------------------------
  */
 
-module rapcore #(
-    parameter BITS = 32
-)(
+`default_nettype none
+
+module rapcores(
 `ifdef USE_POWER_PINS
     inout vdda1,	// User area 1 3.3V supply
     inout vdda2,	// User area 2 3.3V supply
@@ -56,6 +56,9 @@ module rapcore #(
     output [`MPRJ_IO_PADS-1:0] io_out,
     output [`MPRJ_IO_PADS-1:0] io_oeb
 );
+
+    localparam [6:0] BITS = 32;
+
     wire clk;
     wire rst;
 
@@ -81,6 +84,7 @@ module rapcore #(
     //assign io_out = count;
     //assign io_oeb = {(`MPRJ_IO_PADS-1){rst}};
 
+		assign count = 0;
     // LA
     assign la_data_out = {{(127-BITS){1'b0}}, count};
     // Assuming LA probes [63:32] are for controlling the count register
@@ -89,11 +93,54 @@ module rapcore #(
     assign clk = wb_clk_i;
     assign rst = (~la_oen[65]) ? la_data_in[65]: wb_rst_i;
 
+    // GPIO output enable (0 = output, 1 = input)
+    assign io_oeb[15] = 1'b0;    // CHARGEPUMP
+    assign io_oeb[25] = 1'b1;    // analog_cmp1
+    assign io_oeb[27] = 1'b0;    // analog_out1
+    assign io_oeb[26] = 1'b1;    // analog_cmp2
+    assign io_oeb[28] = 1'b0;    // analog_out2
+    assign io_oeb[23] = 1'b0;    // PHASE_A1
+    assign io_oeb[19] = 1'b0;    // PHASE_A2
+    assign io_oeb[16] = 1'b0;    // PHASE_B1
+    assign io_oeb[20] = 1'b0;    // PHASE_B2
+    assign io_oeb[21] = 1'b0;    // PHASE_A1_H
+    assign io_oeb[18] = 1'b0;    // PHASE_A2_H
+    assign io_oeb[14] = 1'b0;    // PHASE_B1_H
+    assign io_oeb[17] = 1'b0;    // PHASE_B2_H
+    assign io_oeb[18] = 1'b1;    // ENC_B
+    assign io_oeb[19] = 1'b1;    // ENC_A
+    assign io_oeb[12] = 1'b0;    // BUFFER_DTR
+    assign io_oeb[24] = 1'b0;    // MOVE_DONE
+    assign io_oeb[29] = 1'b1;    // HALT
+    assign io_oeb[10] = 1'b1;    // SCK
+    assign io_oeb[9] = 1'b1;     // CS
+    assign io_oeb[8] = 1'b1;     // COPI
+    assign io_oeb[11] = 1'b0;    // CIPO
+    assign io_oeb[30] = 1'b0;    // STEPOUTPUT
+    assign io_oeb[31] = 1'b0;    // DIROUTPUT
+    assign io_oeb[32] = 1'b1;    // STEPINPUT
+    assign io_oeb[33] = 1'b1;    // DIRINPUT
+    // unused
+    assign io_oeb[0] = 1'b1;    // JTAG I/O
+    assign io_oeb[1] = 1'b1;    // SDO
+    assign io_oeb[2] = 1'b1;    // SDI
+    assign io_oeb[3] = 1'b1;    // CSB
+    assign io_oeb[4] = 1'b1;    // SCK
+    assign io_oeb[5] = 1'b1;    // Rx
+    assign io_oeb[6] = 1'b1;    // Tx
+    assign io_oeb[7] = 1'b1;    // IRQ
+    assign io_oeb[13] = 1'b1;
+    assign io_oeb[22] = 1'b1;
+    assign io_oeb[34] = 1'b1;
+    assign io_oeb[35] = 1'b1;
+    assign io_oeb[36] = 1'b1;
+    assign io_oeb[37] = 1'b1;
 
-    top top (
+
+    rapcore rapcore0 (
 
         // IO Pads
-        .CLK(clk),
+        .CLK(wb_clk_i),
         .CHARGEPUMP(io_out[15]),
         .analog_cmp1(io_in[25]),
         .analog_out1(io_out[27]),
@@ -115,9 +162,11 @@ module rapcore #(
         .SCK(io_in[10]),
         .CS(io_in[9]),
         .COPI(io_in[8]),
-        .CIPO(io_out[11])
+        .CIPO(io_out[11]),
+        .STEPOUTPUT(io_out[30]),
+        .DIROUTPUT(io_out[31]),
+        .STEPINPUT(io_in[32]),
+        .DIRINPUT(io_in[33])
     );
 
 endmodule
-
-`default_nettype wire
