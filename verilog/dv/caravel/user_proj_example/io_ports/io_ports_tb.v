@@ -186,7 +186,7 @@ module io_ports_tb;
             analog_cmp1 <= 1;
             analog_cmp2 <= 1;
             step <= 1;
-            //step_clock = 0;
+            step_clock <= 40'b0;
         end
         else begin
             cnt <= cnt + 1;
@@ -203,8 +203,8 @@ module io_ports_tb;
             else begin
                 current_abs2 = current2;
             end
-            //step_clock <= step_clock + 1;
-            //step <= step_clock[1]; //10
+            step_clock <= step_clock + 1;
+            step <= step_clock[10];
             analog_cmp1 <= (current_abs1[11:0] >= target_current1[11:0]); // compare unsigned
             analog_cmp2 <= (current_abs2[11:0] >= target_current2[11:0]);
             if (cnt <= 20'h4CA9) begin
