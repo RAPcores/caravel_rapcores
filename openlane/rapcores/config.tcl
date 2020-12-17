@@ -42,7 +42,7 @@ set ::env(DIODE_INSERTION_STRATEGY) 3
 
 # We try to set the die size instead
 #set ::env(PL_BASIC_PLACEMENT) 40
-#set ::env(PL_TARGET_DENSITY) 0.41
+set ::env(PL_TARGET_DENSITY) 0.41
 #set ::env(CELL_PAD) 0
 
 
@@ -60,18 +60,7 @@ set ::env(GND_NETS) [list {vssd1} {vssd2} {vssa1} {vssa2}]
 set ::env(GLB_RT_OBS) "met5 0 0 1000 1000"
 set ::env(GLB_RT_MAXLAYER) 5
 
-set ::env(FP_PDN_LOWER_LAYER) met1
-set ::env(FP_PDN_UPPER_LAYER) met4
-
 set ::env(SYNTH_USE_PG_PINS_DEFINES) "USE_POWER_PINS"
 
-set ::env(VDD_PIN) vccd1
-set ::env(GND_PIN) vssd1
-#set ::env(FP_PDN_VOFFSET) "14"
-#set ::env(FP_PDN_VPITCH) "180"
-#set ::env(FP_PDN_HOFFSET) "14"
-#set ::env(FP_PDN_HPITCH) "180"
-
-
 # If you're going to use multiple power domains, then keep this disabled.
-set ::env(RUN_CVC) 0
+#set ::env(RUN_CVC) 0
