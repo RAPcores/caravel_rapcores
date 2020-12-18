@@ -27,5 +27,8 @@
 // Output Step/DIR signals
 `define STEPOUTPUT
 
+// Enable RESETN
+`define RESETN
+
 // Change the Move Buffer Size. Should be power of two
 //`define MOVE_BUFFER_SIZE 4
