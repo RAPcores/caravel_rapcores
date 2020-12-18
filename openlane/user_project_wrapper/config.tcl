@@ -52,7 +52,7 @@ set ::env(ROUTING_CORES) 6
 # Need to fix a FastRoute bug for this to work, but it's good
 # for a sense of "isolation"
 set ::env(MAGIC_ZEROIZE_ORIGIN) 0
-#set ::env(MAGIC_WRITE_FULL_LEF) 1
+set ::env(MAGIC_WRITE_FULL_LEF) 0
 
 # The following is because there are no std cells in the example wrapper project.
 set ::env(SYNTH_TOP_LEVEL) 1
