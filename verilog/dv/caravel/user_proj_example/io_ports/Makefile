@@ -21,12 +21,14 @@ hex:  ${PATTERN:=.hex}
 %.vvp: %_tb.v %.hex
 ifeq ($(SIM),RTL)
 	iverilog -DFUNCTIONAL -DSIM -I $(BEHAVIOURAL_MODELS) \
-	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) -I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src -I $(RAPCORES_PATH)/testbench \
+	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) -I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src \
+ 	-I $(RAPCORES_PATH)/testbench -I $(RAPCORES_PATH)/boards \
 	-o $@ $<
 else
-	iverilog -DFUNCTIONAL -DSIM -DGL -I $(BEHAVIOURAL_MODELS) \
+	iverilog -DFUNCTIONAL -DSIM -DGL -I $(BEHAVIOURAL_MODELS) -I $(RAPCORES_PATH)/boards \
 	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) -I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src \
-	-o $@ $<
+ 	-I $(RAPCORES_PATH)/testbench \
+	$< -o $@
 endif
 # MERGE: -I $(VERILOG_PATH) maybe needed for GL
 

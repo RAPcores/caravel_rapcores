@@ -2,32 +2,31 @@
 
 `timescale 1 ns / 1 ps
 
-`include "defines.v"
-`include "rapcore_caravel_defines.v"
-`include "macro_params.v"
-`include "constants.v"
-`include "quad_enc.v"
-`include "spi.v"
-`include "dda_timer.v"
-`include "spi_state_machine.v"
-`include "microstepper/chargepump.v"
-`include "microstepper/microstepper_control.v"
-`include "microstepper/mytimer_8.v"
-`include "microstepper/mytimer_10.v"
-`include "microstepper/microstep_counter.v"
-`include "microstepper/cosine.v"
-`include "microstepper/analog_out.v"
-`include "microstepper/microstepper_top.v"
-`include "rapcore.v"
-`include "hbridge_coil.v"
-`include "pwm_duty.v"
-
 //`define USE_POWER_PINS
 
-`ifdef PROJ_GL
+`ifdef GL
   `include "gl/rapcore.v"
 `else
   `include "rapcores.v"
+  `include "defines.v"
+  `include "mpw_one_defines.v"
+  `include "macro_params.v"
+  `include "constants.v"
+  `include "quad_enc.v"
+  `include "spi.v"
+  `include "dda_timer.v"
+  `include "spi_state_machine.v"
+  `include "microstepper/chargepump.v"
+  `include "microstepper/microstepper_control.v"
+  `include "microstepper/mytimer_8.v"
+  `include "microstepper/mytimer_10.v"
+  `include "microstepper/microstep_counter.v"
+  `include "microstepper/cosine.v"
+  `include "microstepper/analog_out.v"
+  `include "microstepper/microstepper_top.v"
+  `include "rapcore.v"
+  `include "hbridge_coil.v"
+  `include "pwm_duty.v"
 `endif
 
 `include "caravel.v"
@@ -207,7 +206,7 @@ module io_ports_tb;
             step <= step_clock[10];
             analog_cmp1 <= (current_abs1[11:0] >= target_current1[11:0]); // compare unsigned
             analog_cmp2 <= (current_abs2[11:0] >= target_current2[11:0]);
-            if (cnt <= 20'h4CA9) begin
+            if (cnt <= 20'hC400) begin
                 dir <= 1;
             end
             else
