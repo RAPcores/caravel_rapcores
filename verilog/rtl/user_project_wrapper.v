@@ -79,7 +79,7 @@ module user_project_wrapper #(
     /* User project is instantiated  here   */
     /*--------------------------------------*/
 
-    rapcore_caravel rapcore_caravel0 (
+    rapcores rapcores0 (
 
 `ifndef SIM
     `ifdef USE_POWER_PINS

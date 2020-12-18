@@ -42,7 +42,7 @@
 `ifdef PROJ_GL
   `include "gl/rapcore.v"
 `else
-  `include "rapcore_caravel.v"
+  `include "rapcores.v"
 `endif
 
 `include "caravel.v"
@@ -96,7 +96,7 @@ module io_ports_tb;
 	    wait(mprj_io_0 == 8'h07);
             wait(mprj_io_0 == 8'h08);
 	    wait(mprj_io_0 == 8'h09);
-            wait(mprj_io_0 == 8'h0A);   
+            wait(mprj_io_0 == 8'h0A);
 	    wait(mprj_io_0 == 8'hFF);
 	    wait(mprj_io_0 == 8'h00);
 
@@ -301,4 +301,3 @@ module io_ports_tb;
     );
 endmodule
 `default_nettype wire
-
