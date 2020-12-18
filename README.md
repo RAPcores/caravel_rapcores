@@ -1,4 +1,4 @@
-# Caravel-RAPcore
+# RAPcore Caravel Flow
 
 https://rapcores.github.io/rapcores/
 
@@ -15,7 +15,12 @@ processing on the microcontroller and greatly simplify the motor driver.
 - High-speed Quadrature Encoder Accumulator
 - High-Speed SPI Bus
 
+## Build Requirements
+
+See INSTALL.md for local development instructions.
+
 ## Documentation
+
 https://rapcores.github.io/rapcores/
 
 ## License
