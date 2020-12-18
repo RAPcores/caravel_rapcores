@@ -44,16 +44,13 @@ set ::env(VERILOG_FILES) "\
 
 set ::env(VERILOG_FILES_BLACKBOX) "\
     $script_dir/../../verilog/rtl/defines.v \
-    $script_dir/../../rapcore_caravel_defines.v \
-    $script_dir/../../rapcores/src/macro_params.v \
-    $script_dir/../../rapcores/src/constants.v \
-    $script_dir/../../rapcores/src/rapcore.v"
+    $script_dir/../../verilog/rtl/rapcores.v"
 
 set ::env(EXTRA_LEFS) "\
-	$script_dir/../../lef/rapcore.lef"
+	$script_dir/../../lef/rapcores.lef"
 
 set ::env(EXTRA_GDS_FILES) "\
-	$script_dir/../../gds/rapcore.gds"
+	$script_dir/../../gds/rapcores.gds"
 
 #set ::env(GLB_RT_OBS) "met4 1150 1700 1690 2240"
 

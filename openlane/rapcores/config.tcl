@@ -1,11 +1,11 @@
 set script_dir [file dirname [file normalize [info script]]]
 
-set ::env(DESIGN_NAME) rapcore
+set ::env(DESIGN_NAME) rapcores
 
 set ::env(VERILOG_FILES) "\
         $script_dir/../../verilog/rtl/defines.v \
         $script_dir/../../rapcores/src/constants.v \
-        $script_dir/../../rapcore_caravel_defines.v \
+        $script_dir/../../rapcores/boards/mpw_one_defines.v \
         $script_dir/../../rapcores/src/macro_params.v \
         $script_dir/../../rapcores/src/spi_state_machine.v \
         $script_dir/../../rapcores/src/dda_timer.v \
@@ -22,8 +22,10 @@ set ::env(VERILOG_FILES) "\
         $script_dir/../../rapcores/src/microstepper/mytimer.v \
         $script_dir/../../rapcores/src/microstepper/mytimer_8.v \
         $script_dir/../../rapcores/src/microstepper/mytimer_10.v \
-        $script_dir/../../rapcores/src/rapcore.v"
-set ::env(CLOCK_PORT) "CLK"
+        $script_dir/../../rapcores/src/rapcore.v \
+        $script_dir/../../verilog/rtl/rapcores.v"
+
+set ::env(CLOCK_PORT) "wb_clk_i"
 set ::env(CLOCK_PERIOD) "15"
 
 set ::env(FP_SIZING) absolute
@@ -44,6 +46,8 @@ set ::env(DIODE_INSERTION_STRATEGY) 3
 # We try to set the die size instead
 #set ::env(PL_BASIC_PLACEMENT) 40
 set ::env(PL_TARGET_DENSITY) 0.41
+#set ::env(CELL_PAD) 0
+
 
 # Routing
 # -------
@@ -52,14 +56,20 @@ set ::env(PL_TARGET_DENSITY) 0.41
 set ::env(ROUTING_CORES) 6
 #set ::env(GLB_RT_ALLOW_CONGESTION) 1
 
-# block met5 with obstruction
-set ::env(GLB_RT_OBS) "met5 0 0 800 800"
+set ::env(VDD_NETS) [list {vccd1} {vccd2} {vdda1} {vdda2}]
+set ::env(GND_NETS) [list {vssd1} {vssd2} {vssa1} {vssa2}]
 
-#set ::env(VDD_PIN) vccd1
-#set ::env(GND_PIN) vssd1
+# block met5 with obstruction
+set ::env(GLB_RT_OBS) "met5 0 0 1000 1000"
+set ::env(GLB_RT_MAXLAYER) 5
+set ::env(VDD_PIN) vccd1
+set ::env(GND_PIN) vssd1
 set ::env(FP_PDN_VOFFSET) "14"
 set ::env(FP_PDN_VPITCH) "180"
 set ::env(FP_PDN_HOFFSET) "14"
 set ::env(FP_PDN_HPITCH) "180"
 
+set ::env(SYNTH_USE_PG_PINS_DEFINES) "USE_POWER_PINS"
 
+# If you're going to use multiple power domains, then keep this disabled.
+#set ::env(RUN_CVC) 0

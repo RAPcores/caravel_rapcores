@@ -1,11 +1,14 @@
 FIRMWARE_PATH = ../..
 RTL_PATH = ../../../../rtl
 IP_PATH = ../../../../ip
-BEHAVIOURAL_MODELS = ../../ 
+BEHAVIOURAL_MODELS = ../../
+RAPCORES_PATH = ../../../../../rapcores
 
-GCC_PATH?=/ef/apps/bin
+GCC_PATH?=//opt/riscv32/bin
 GCC_PREFIX?=riscv32-unknown-elf
-PDK_PATH?=/ef/tech/SW/sky130A
+PDK_PATH?=$(PDK_ROOT)/sky130A
+
+SIM?=RTL
 
 .SUFFIXES:
 
@@ -16,9 +19,16 @@ all:  ${PATTERN:=.vcd}
 hex:  ${PATTERN:=.hex}
 
 %.vvp: %_tb.v %.hex
-	iverilog -DFUNCTIONAL -I $(BEHAVIOURAL_MODELS) \
-	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) \
+ifeq ($(SIM),RTL)
+	iverilog -DFUNCTIONAL -DSIM -I $(BEHAVIOURAL_MODELS) \
+	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) -I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src -I $(RAPCORES_PATH)/testbench \
 	-o $@ $<
+else
+	iverilog -DFUNCTIONAL -DSIM -DGL -I $(BEHAVIOURAL_MODELS) \
+	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) -I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src \
+	-o $@ $<
+endif
+# MERGE: -I $(VERILOG_PATH) maybe needed for GL
 
 %.vcd: %.vvp
 	vvp $<
@@ -27,7 +37,7 @@ hex:  ${PATTERN:=.hex}
 	${GCC_PATH}/${GCC_PREFIX}-gcc -march=rv32imc -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections.lds,--strip-debug -ffreestanding -nostdlib -o $@ $(FIRMWARE_PATH)/start.s $<
 
 %.hex: %.elf
-	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@ 
+	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@
 	# to fix flash base address
 	sed -i 's/@10000000/@00000000/g' $@
 
