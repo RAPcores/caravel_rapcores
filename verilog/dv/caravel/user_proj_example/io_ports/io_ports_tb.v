@@ -19,29 +19,31 @@
 
 //`define USE_POWER_PINS
 
+
+`include "defines.v"
+`include "mpw_one_defines.v"
+`include "macro_params.v"
+`include "constants.v"
+`include "quad_enc.v"
+`include "spi.v"
+`include "dda_timer.v"
+`include "spi_state_machine.v"
+`include "microstepper/chargepump.v"
+`include "microstepper/microstepper_control.v"
+`include "microstepper/mytimer_8.v"
+`include "microstepper/mytimer_10.v"
+`include "microstepper/microstep_counter.v"
+`include "microstepper/cosine.v"
+`include "microstepper/analog_out.v"
+`include "microstepper/microstepper_top.v"
+`include "rapcore.v"
+`include "hbridge_coil.v"
+`include "pwm_duty.v"
+
 `ifdef GL
   `include "gl/rapcores.v"
 `else
   `include "rapcores.v"
-  `include "defines.v"
-  `include "mpw_one_defines.v"
-  `include "macro_params.v"
-  `include "constants.v"
-  `include "quad_enc.v"
-  `include "spi.v"
-  `include "dda_timer.v"
-  `include "spi_state_machine.v"
-  `include "microstepper/chargepump.v"
-  `include "microstepper/microstepper_control.v"
-  `include "microstepper/mytimer_8.v"
-  `include "microstepper/mytimer_10.v"
-  `include "microstepper/microstep_counter.v"
-  `include "microstepper/cosine.v"
-  `include "microstepper/analog_out.v"
-  `include "microstepper/microstepper_top.v"
-  `include "rapcore.v"
-  `include "hbridge_coil.v"
-  `include "pwm_duty.v"
 `endif
 
 `include "caravel.v"
