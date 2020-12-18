@@ -22,7 +22,9 @@
 
 `default_nettype none
 
-module rapcores(
+module rapcores #(
+    parameter BITS = 32
+)(
 `ifdef USE_POWER_PINS
     inout vdda1,	// User area 1 3.3V supply
     inout vdda2,	// User area 2 3.3V supply
@@ -57,10 +59,9 @@ module rapcores(
     output [`MPRJ_IO_PADS-1:0] io_oeb
 );
 
-    localparam [6:0] BITS = 32;
-
     wire clk;
     wire rst;
+    wire enable;
 
     wire [`MPRJ_IO_PADS-1:0] io_in;
     wire [`MPRJ_IO_PADS-1:0] io_out;
@@ -91,7 +92,8 @@ module rapcores(
     assign la_write = ~la_oen[63:32] & ~{BITS{valid}};
     // Assuming LA probes [65:64] are for controlling the count clk & reset
     assign clk = wb_clk_i;
-    assign rst = (~la_oen[65]) ? la_data_in[65]: wb_rst_i;
+    assign rst = ~la_oen[65] && la_data_in[65] && ~wb_rst_i;
+    assign enable = ~la_oen[64] && la_data_in[64];
 
     // GPIO output enable (0 = output, 1 = input)
     assign io_oeb[15] = 1'b0;    // CHARGEPUMP
@@ -107,40 +109,52 @@ module rapcores(
     assign io_oeb[18] = 1'b0;    // PHASE_A2_H
     assign io_oeb[14] = 1'b0;    // PHASE_B1_H
     assign io_oeb[17] = 1'b0;    // PHASE_B2_H
-    assign io_oeb[18] = 1'b1;    // ENC_B
-    assign io_oeb[19] = 1'b1;    // ENC_A
-    assign io_oeb[12] = 1'b0;    // BUFFER_DTR
+    assign io_oeb[12] = 1'b0;    // ENC_B
+    assign io_oeb[13] = 1'b0;    // ENC_A
+    assign io_oeb[37] = 1'b0;    // BUFFER_DTR
     assign io_oeb[24] = 1'b0;    // MOVE_DONE
     assign io_oeb[29] = 1'b1;    // HALT
-    assign io_oeb[10] = 1'b1;    // SCK
-    assign io_oeb[9] = 1'b1;     // CS
-    assign io_oeb[8] = 1'b1;     // COPI
-    assign io_oeb[11] = 1'b0;    // CIPO
+    assign io_oeb[35] = 1'b1;    // SCK
+    assign io_oeb[34] = 1'b1;     // CS
+    assign io_oeb[33] = 1'b1;     // COPI
+    assign io_oeb[36] = 1'b0;    // CIPO
     assign io_oeb[30] = 1'b0;    // STEPOUTPUT
     assign io_oeb[31] = 1'b0;    // DIROUTPUT
     assign io_oeb[32] = 1'b1;    // STEPINPUT
     assign io_oeb[33] = 1'b1;    // DIRINPUT
     // unused
-    assign io_oeb[0] = 1'b1;    // JTAG I/O
-    assign io_oeb[1] = 1'b1;    // SDO
-    assign io_oeb[2] = 1'b1;    // SDI
-    assign io_oeb[3] = 1'b1;    // CSB
-    assign io_oeb[4] = 1'b1;    // SCK
-    assign io_oeb[5] = 1'b1;    // Rx
-    assign io_oeb[6] = 1'b1;    // Tx
-    assign io_oeb[7] = 1'b1;    // IRQ
+    assign io_oeb[0] = 1'b0;    // JTAG I/O
+    assign io_oeb[1] = 1'b0;    // SDO
+    assign io_oeb[2] = 1'b0;    // SDI
+    assign io_oeb[3] = 1'b0;    // CSB
+    assign io_oeb[4] = 1'b0;    // SCK
+    assign io_oeb[5] = 1'b0;    // Rx
+    assign io_oeb[6] = 1'b0;    // Tx
+    assign io_oeb[7] = 1'b0;    // IRQ
     assign io_oeb[13] = 1'b1;
-    assign io_oeb[22] = 1'b1;
-    assign io_oeb[34] = 1'b1;
-    assign io_oeb[35] = 1'b1;
-    assign io_oeb[36] = 1'b1;
-    assign io_oeb[37] = 1'b1;
+    assign io_oeb[8] = 1'b1;
+    assign io_oeb[9] = 1'b1;
+    assign io_oeb[10] = 1'b1;
+    assign io_oeb[11] = 1'b1;
+    assign io_oeb[12] = 1'b1;
 
+
+		wire resetn;
+    reg [13:0] resetn_counter = 0;
+		assign resetn = &resetn_counter && rst;
+
+		always @(posedge wb_clk_i) begin
+		  if (!resetn && !wb_rst_i && rst) resetn_counter <= resetn_counter +1;
+		end
+
+    // IO
+    assign io_out[7:0] = resetn_counter[13:6]; //count;
 
     rapcore rapcore0 (
 
         // IO Pads
         .CLK(wb_clk_i),
+        .resetn_in(resetn),
         .CHARGEPUMP(io_out[15]),
         .analog_cmp1(io_in[25]),
         .analog_out1(io_out[27]),
@@ -156,17 +170,18 @@ module rapcores(
         .PHASE_B2_H(io_out[17]),
         .ENC_B(io_in[18]),
         .ENC_A(io_in[19]),
-        .BUFFER_DTR(io_out[12]),
+        .BUFFER_DTR(io_out[37]),
         .MOVE_DONE(io_out[24]),
         .HALT(io_in[29]),
-        .SCK(io_in[10]),
-        .CS(io_in[9]),
-        .COPI(io_in[8]),
-        .CIPO(io_out[11]),
+        .SCK(io_in[35]),
+        .CS(io_in[34]),
+        .COPI(io_in[22]),
+        .CIPO(io_out[36]),
         .STEPOUTPUT(io_out[30]),
         .DIROUTPUT(io_out[31]),
         .STEPINPUT(io_in[32]),
-        .DIRINPUT(io_in[33])
+        .DIRINPUT(io_in[33]),
+        .ENINPUT(enable)
     );
 
 endmodule
