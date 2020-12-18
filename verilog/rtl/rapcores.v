@@ -109,8 +109,8 @@ module rapcores #(
     assign io_oeb[18] = 1'b0;    // PHASE_A2_H
     assign io_oeb[14] = 1'b0;    // PHASE_B1_H
     assign io_oeb[17] = 1'b0;    // PHASE_B2_H
-    assign io_oeb[12] = 1'b0;    // ENC_B
-    assign io_oeb[13] = 1'b0;    // ENC_A
+    assign io_oeb[12] = 1'b1;    // ENC_B
+    assign io_oeb[13] = 1'b1;    // ENC_A
     assign io_oeb[37] = 1'b0;    // BUFFER_DTR
     assign io_oeb[24] = 1'b0;    // MOVE_DONE
     assign io_oeb[29] = 1'b1;    // HALT
@@ -131,7 +131,6 @@ module rapcores #(
     assign io_oeb[5] = 1'b0;    // Rx
     assign io_oeb[6] = 1'b0;    // Tx
     assign io_oeb[7] = 1'b0;    // IRQ
-    assign io_oeb[13] = 1'b1;
     assign io_oeb[8] = 1'b1;
     assign io_oeb[9] = 1'b1;
     assign io_oeb[10] = 1'b1;
