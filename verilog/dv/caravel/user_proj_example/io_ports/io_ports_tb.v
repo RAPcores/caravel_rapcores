@@ -20,7 +20,7 @@
 //`define USE_POWER_PINS
 
 `ifdef GL
-  `include "gl/rapcore.v"
+  `include "gl/rapcores.v"
 `else
   `include "rapcores.v"
   `include "defines.v"
