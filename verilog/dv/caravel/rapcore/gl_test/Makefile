@@ -14,50 +14,39 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+PROJ_ROOT = ../../../../..
 FIRMWARE_PATH = ../..
 VERILOG_PATH = ../../../..
 RTL_PATH = $(VERILOG_PATH)/rtl
 IP_PATH = ../../../../ip
 BEHAVIOURAL_MODELS = ../../
+RAPCORE_PATH = $(PROJ_ROOT)/rapcores
+RAPCORE_HARNESS = $(PROJ_ROOT)/rapcores/testbench/rapcore_harness_tb.v
+RAPCORE_GL = $(PROJ_ROOT)/verilog/gl/rapcore.v
+RAPCORE_CONFIG = $(PROJ_ROOT)/rapcores/boards/mpw_one_defines.v
+IP_PATH = ../../../../ip
+BEHAVIOURAL_MODELS = ../../
 
-GCC_PATH?=/opt/riscv32/bin
-GCC_PREFIX?=riscv32-unknown-elf
-PDK_PATH?=$(PDK_ROOT)/sky130A
+PDK_PATH?=$(PDK_ROOT)/sky130A/
+SKYLIBS?=$(PDK_PATH)/libs.ref/sky130_fd_sc_hd/verilog/
 
 SIM?=GL
 
 .SUFFIXES:
 
-PATTERN = io_ports
+PATTERN = rapcore
 
 all:  ${PATTERN:=.vcd}
 
 hex:  ${PATTERN:=.hex}
 
-%.vvp: %_tb.v %.hex
-ifeq ($(SIM),RTL)
-	iverilog -DFUNCTIONAL -DSIM -I $(BEHAVIOURAL_MODELS) \
-	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) \
-	$< -o $@
-else
+%.vvp: %_tb.v
 	iverilog -DFUNCTIONAL -DSIM -DGL -I $(BEHAVIOURAL_MODELS) \
-	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) \
-	$< -o $@
-endif
+	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) $(RAPCORE_CONFIG) $(RAPCORE_HARNESS) $(RAPCORE_GL) \
+	rapcore_tb.v
 
 %.vcd: %.vvp
 	vvp $<
-
-%.elf: %.c $(FIRMWARE_PATH)/sections.lds $(FIRMWARE_PATH)/start.s
-	${GCC_PATH}/${GCC_PREFIX}-gcc -march=rv32imc -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections.lds,--strip-debug -ffreestanding -nostdlib -o $@ $(FIRMWARE_PATH)/start.s $<
-
-%.hex: %.elf
-	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@
-	# to fix flash base address
-	sed -i 's/@10000000/@00000000/g' $@
-
-%.bin: %.elf
-	${GCC_PATH}/${GCC_PREFIX}-objcopy -O binary $< /dev/stdout | tail -c +1048577 > $@
 
 # ---- Clean ----
 

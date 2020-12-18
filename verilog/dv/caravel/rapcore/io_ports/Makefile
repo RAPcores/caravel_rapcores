@@ -14,17 +14,23 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+PROJ_ROOT = ../../../../..
 FIRMWARE_PATH = ../..
 VERILOG_PATH = ../../../..
 RTL_PATH = $(VERILOG_PATH)/rtl
 IP_PATH = ../../../../ip
 BEHAVIOURAL_MODELS = ../../
 
+RAPCORE_PATH = $(PROJ_ROOT)/rapcores
+RAPCORE_HARNESS = $(PROJ_ROOT)/rapcores/testbench/rapcore_harness_tb.v
+RAPCORE_GL = $(PROJ_ROOT)/verilog/gl/rapcore.v
+RAPCORE_CONFIG = $(PROJ_ROOT)/rapcores/boards/mpw_one_defines.v
+
 GCC_PATH?=/opt/riscv32/bin
 GCC_PREFIX?=riscv32-unknown-elf
 PDK_PATH?=$(PDK_ROOT)/sky130A
 
-SIM?=GL
+SIM?=RTL
 
 .SUFFIXES:
 
@@ -37,11 +43,11 @@ hex:  ${PATTERN:=.hex}
 %.vvp: %_tb.v %.hex
 ifeq ($(SIM),RTL)
 	iverilog -DFUNCTIONAL -DSIM -I $(BEHAVIOURAL_MODELS) \
-	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) \
+	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) $(RAPCORE_HARNESS) \
 	$< -o $@
 else
 	iverilog -DFUNCTIONAL -DSIM -DGL -I $(BEHAVIOURAL_MODELS) \
-	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) \
+	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH)  $(RAPCORE_HARNESS) \
 	$< -o $@
 endif
 

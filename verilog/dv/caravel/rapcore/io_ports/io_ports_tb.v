@@ -22,7 +22,7 @@
 
 module io_ports_tb(output COPI);
 	reg clock;
-    	reg RSTB;
+    reg RSTB;
 	reg power1, power2;
 	reg power3, power4;
 
@@ -41,6 +41,7 @@ module io_ports_tb(output COPI);
 	initial begin
 		clock = 0;
 	end
+
 
 	initial begin
 		$dumpfile("io_ports.vcd");
@@ -129,7 +130,7 @@ module io_ports_tb(output COPI);
 		.vssd2	  (VSS),
 		.clock	  (clock),
 		.gpio     (gpio),
-        	.mprj_io  (mprj_io),
+        .mprj_io  (mprj_io),
 		.flash_csb(flash_csb),
 		.flash_clk(flash_clk),
 		.flash_io0(flash_io0),
@@ -147,6 +148,124 @@ module io_ports_tb(output COPI);
 		.io2(),			// not used
 		.io3()			// not used
 	);
+
+  `ifdef SPI_INTERFACE
+    wire SCK = mprj_io[10];
+    wire CS = mprj_io[9];
+    wire COPI = mprj_io[8];
+    wire CIPO = mprj_io[11];
+  `endif
+  `ifdef ULTIBRIDGE
+    wire CHARGEPUMP = mprj_io[15];
+    wire analog_cmp1 = mprj_io[25];
+    wire analog_out1 = mprj_io[27];
+    wire analog_cmp2 = mprj_io[26];
+    wire analog_out2 = mprj_io[28];
+    wire PHASE_A1 = mprj_io[23];  // Phase A
+    wire PHASE_A2 = mprj_io[19];  // Phase A
+    wire PHASE_B1 = mprj_io[16];  // Phase B
+    wire PHASE_B2 = mprj_io[20];  // Phase B
+    wire PHASE_A1_H = mprj_io[21];  // Phase A
+    wire PHASE_A2_H = mprj_io[18];  // Phase A
+    wire PHASE_B1_H = mprj_io[14];  // Phase B
+    wire PHASE_B2_H = mprj_io[17];  // Phase B
+  `endif
+  `ifdef QUAD_ENC
+    wire ENC_B;
+    wire ENC_A;
+  `endif
+  `ifdef BUFFER_DTR
+    wire BUFFER_DTR;
+  `endif
+  `ifdef MOVE_DONE
+    wire MOVE_DONE;
+  `endif
+  `ifdef HALT
+    wire HALT = mprj_io[29];
+  `endif
+  `ifdef STEPINPUT
+    wire STEPINPUT;
+    wire DIRINPUT;
+    wire ENINPUT;
+  `endif
+  `ifdef STEPOUTPUT
+    wire STEPOUTPUT;
+    wire ENOUTPUT;
+    wire DIROUTPUT;
+  `endif
+  `ifdef LA_IN
+    wire LA_IN;
+  `endif
+  `ifdef LA_OUT
+    wire LA_OUT;
+  `endif
+  `ifdef RESETN
+    wire resetn_in;
+  `endif
+  wire CLK = clock;
+
+  rapcore_harness harness0 (
+      `ifdef LED
+        .LED(LED),
+      `endif
+      `ifdef tinyfpgabx
+        .USBPU(USBPU),  // USB pull-up resistor
+      `endif
+      `ifdef SPI_INTERFACE
+        .SCK(SCK),
+        .CS(CS),
+        .COPI(COPI),
+        .CIPO(CIPO),
+      `endif
+      `ifdef ULTIBRIDGE
+        .CHARGEPUMP(CHARGEPUMP),
+        .analog_cmp1(analog_cmp1),
+        .analog_out1(analog_out1),
+        .analog_cmp2(analog_cmp2),
+        .analog_out2(analog_out2),
+        .PHASE_A1(PHASE_A1),  // Phase A
+        .PHASE_A2(PHASE_A2),  // Phase A
+        .PHASE_B1(PHASE_B1),  // Phase B
+        .PHASE_B2(PHASE_B2),  // Phase B
+        .PHASE_A1_H(PHASE_A1_H),  // Phase A
+        .PHASE_A2_H(PHASE_A2_H),  // Phase A
+        .PHASE_B1_H(PHASE_B1_H),  // Phase B
+        .PHASE_B2_H(PHASE_B2_H),  // Phase B
+      `endif
+      `ifdef QUAD_ENC
+        .ENC_B(ENC_B),
+        .ENC_A(ENC_A),
+      `endif
+      `ifdef BUFFER_DTR
+        .BUFFER_DTR(BUFFER_DTR),
+      `endif
+      `ifdef MOVE_DONE
+        .MOVE_DONE(MOVE_DONE),
+      `endif
+      `ifdef HALT
+        .HALT(HALT),
+      `endif
+      `ifdef STEPINPUT
+        .STEPINPUT(STEPINPUT),
+        .DIRINPUT(DIRINPUT),
+        .ENINPUT(ENINPUT),
+      `endif
+      `ifdef STEPOUTPUT
+        .STEPOUTPUT(STEPOUTPUT),
+        .ENOUTPUT(ENOUTPUT),
+        .DIROUTPUT(DIROUTPUT),
+      `endif
+      `ifdef LA_IN
+        .LA_IN(LA_IN),
+      `endif
+      `ifdef LA_OUT
+        .LA_OUT(LA_OUT),
+      `endif
+      `ifdef RESETN
+        .resetn_in(resetn_in),
+      `endif
+      .CLK(CLK)
+  );
 
 endmodule
 `default_nettype wire
