@@ -104,10 +104,10 @@ module user_project_wrapper #(
 	.wbs_stb_i(wbs_stb_i),
 	.wbs_we_i(wbs_we_i),
 	.wbs_sel_i(wbs_sel_i),
-	.wbs_adr_i(wbs_adr_i),
-	.wbs_dat_i(wbs_dat_i),
+	//.wbs_adr_i(wbs_adr_i),
+	//.wbs_dat_i(wbs_dat_i),
 	.wbs_ack_o(wbs_ack_o),
-	.wbs_dat_o(wbs_dat_o),
+	//.wbs_dat_o(wbs_dat_o),
 
 	// Logic Analyzer
 

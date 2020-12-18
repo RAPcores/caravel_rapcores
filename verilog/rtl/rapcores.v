@@ -43,10 +43,10 @@ module rapcores #(
     input wbs_cyc_i,
     input wbs_we_i,
     input [3:0] wbs_sel_i,
-    input [31:0] wbs_dat_i,
-    input [31:0] wbs_adr_i,
+    //input [31:0] wbs_dat_i,
+    //input [31:0] wbs_adr_i,
     output wbs_ack_o,
-    output [31:0] wbs_dat_o,
+    //output [31:0] wbs_dat_o,
 
     // Logic Analyzer Signals
     input  [127:0] la_data_in,
@@ -67,8 +67,8 @@ module rapcores #(
     wire [`MPRJ_IO_PADS-1:0] io_out;
     wire [`MPRJ_IO_PADS-1:0] io_oeb;
 
-    wire [31:0] rdata;
-    wire [31:0] wdata;
+    //wire [31:0] rdata;
+    //wire [31:0] wdata;
     wire [BITS-1:0] count;
 
     wire valid;
@@ -78,8 +78,8 @@ module rapcores #(
     // WB MI A
     assign valid = wbs_cyc_i && wbs_stb_i;
     assign wstrb = wbs_sel_i & {4{wbs_we_i}};
-    assign wbs_dat_o = rdata;
-    assign wdata = wbs_dat_i;
+    //assign wbs_dat_o = rdata;
+    //assign wdata = wbs_dat_i;
 
     // IO
     //assign io_out = count;

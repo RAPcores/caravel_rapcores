@@ -5,7 +5,7 @@ set ::env(DESIGN_NAME) rapcores
 set ::env(VERILOG_FILES) "\
         $script_dir/../../verilog/rtl/defines.v \
         $script_dir/../../rapcores/src/constants.v \
-        $script_dir/../../rapcore_caravel_defines.v \
+        $script_dir/../../rapcores/boards/mpw_one_defines.v \
         $script_dir/../../rapcores/src/macro_params.v \
         $script_dir/../../rapcores/src/spi_state_machine.v \
         $script_dir/../../rapcores/src/dda_timer.v \
