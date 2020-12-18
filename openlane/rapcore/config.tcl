@@ -29,7 +29,7 @@ set ::env(CLOCK_PORT) "wb_clk_i"
 set ::env(CLOCK_PERIOD) "15"
 
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 650 650"
+set ::env(DIE_AREA) "0 0 600 600"
 
 # use the empty wrapper to help pin placement
 set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
@@ -64,11 +64,11 @@ set ::env(GLB_RT_OBS) "met5 0 0 800 800"
 set ::env(FP_PDN_LOWER_LAYER) met4
 set ::env(FP_PDN_UPPER_LAYER) met5
 
-#set ::env(VDD_PIN) vccd1
-#set ::env(GND_PIN) vssd1
-#set ::env(FP_PDN_VOFFSET) "14"
-#set ::env(FP_PDN_VPITCH) "180"
-#set ::env(FP_PDN_HOFFSET) "14"
-#set ::env(FP_PDN_HPITCH) "180"
+set ::env(VDD_PIN) vccd1
+set ::env(GND_PIN) vssd1
+set ::env(FP_PDN_VOFFSET) "14"
+set ::env(FP_PDN_VPITCH) "180"
+set ::env(FP_PDN_HOFFSET) "14"
+set ::env(FP_PDN_HPITCH) "180"
 
 
