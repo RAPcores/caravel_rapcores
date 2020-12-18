@@ -135,8 +135,6 @@ module rapcores #(
     assign io_oeb[8] = 1'b1;
     assign io_oeb[9] = 1'b1;
     assign io_oeb[10] = 1'b1;
-    assign io_oeb[11] = 1'b1;
-    assign io_oeb[12] = 1'b1;
 
 
 		wire resetn;
