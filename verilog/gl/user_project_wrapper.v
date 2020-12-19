@@ -27,7 +27,7 @@ module user_project_wrapper(user_clock2, wb_clk_i, wb_rst_i, wbs_ack_o, wbs_cyc_
   input [3:0] wbs_sel_i;
   input wbs_stb_i;
   input wbs_we_i;
-  user_proj_example mprj (
+  rapcores rapcores0 (
     .io_in(io_in),
     .io_oeb(io_oeb),
     .io_out(io_out),
@@ -45,10 +45,7 @@ module user_project_wrapper(user_clock2, wb_clk_i, wb_rst_i, wbs_ack_o, wbs_cyc_
     .wb_clk_i(wb_clk_i),
     .wb_rst_i(wb_rst_i),
     .wbs_ack_o(wbs_ack_o),
-    .wbs_adr_i(wbs_adr_i),
     .wbs_cyc_i(wbs_cyc_i),
-    .wbs_dat_i(wbs_dat_i),
-    .wbs_dat_o(wbs_dat_o),
     .wbs_sel_i(wbs_sel_i),
     .wbs_stb_i(wbs_stb_i),
     .wbs_we_i(wbs_we_i)
