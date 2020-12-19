@@ -124,6 +124,8 @@ module rapcores #(
     assign io_oeb[33] = 1'b1;    // DIRINPUT
     assign io_oeb[11] = 1'b1;    // ENINPUT
     assign io_oeb[10] = 1'b0;    // ENOUTPUT
+    assign io_oeb[9] = 1'b1;    //RESETIN
+
     // unused
     assign io_oeb[0] = 1'b0;    // JTAG I/O
     assign io_oeb[1] = 1'b0;    // SDO
@@ -134,7 +136,6 @@ module rapcores #(
     assign io_oeb[6] = 1'b0;    // Tx
     assign io_oeb[7] = 1'b0;    // IRQ
     assign io_oeb[8] = 1'b1;
-    assign io_oeb[9] = 1'b1;
 
 
     wire resetn;
@@ -152,7 +153,7 @@ module rapcores #(
 
         // IO Pads
         .CLK(wb_clk_i),
-        .resetn_in(resetn),
+        .resetn_in(io_in[9]),
         .CHARGEPUMP(io_out[15]),
         .analog_cmp1(io_in[25]),
         .analog_out1(io_out[27]),
