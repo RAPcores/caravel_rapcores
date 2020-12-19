@@ -32,9 +32,12 @@ set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 650 650"
 
 # use the empty wrapper to help pin placement
-set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
-set ::env(FP_CONTEXT_DEF) $script_dir/../user_project_wrapper_empty/runs/user_project_wrapper_empty/tmp/floorplan/ioPlacer.def
-set ::env(FP_CONTEXT_LEF) $script_dir/../user_project_wrapper_empty/runs/user_project_wrapper_empty/tmp/merged_unpadded.lef
+#set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
+#set ::env(FP_CONTEXT_DEF) $script_dir/../user_project_wrapper_empty/runs/user_project_wrapper_empty/tmp/floorplan/ioPlacer.def
+#set ::env(FP_CONTEXT_LEF) $script_dir/../user_project_wrapper_empty/runs/user_project_wrapper_empty/tmp/merged_unpadded.lef
+
+# Since we use all the same pin names reuse the wrapper pin arrangement.
+set ::env(FP_PIN_ORDER_CFG) $script_dir/../user_project_wrapper_empty/pin_order.cfg
 
 # Some config for hardening
 set ::env(DESIGN_IS_CORE) 0
@@ -56,8 +59,12 @@ set ::env(PL_TARGET_DENSITY) 0.41
 set ::env(ROUTING_CORES) 6
 #set ::env(GLB_RT_ALLOW_CONGESTION) 1
 
-set ::env(VDD_NETS) [list {vccd1} {vccd2} {vdda1} {vdda2}]
-set ::env(GND_NETS) [list {vssd1} {vssd2} {vssa1} {vssa2}]
+set ::env(_VDD_NET_NAME) vccd1
+set ::env(_GND_NET_NAME) vssd1
+set ::env(VDD_NETS) [list {vccd1}]
+set ::env(GND_NETS) [list {vssd1}]
+set ::env(VDD_PIN) vccd1
+set ::env(GND_PIN) vssd1
 
 # block met5 with obstruction
 set ::env(GLB_RT_OBS) "met5 0 0 1000 1000"
