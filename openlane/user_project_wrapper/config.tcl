@@ -63,6 +63,10 @@ set ::env(FILL_INSERTION) 0
 set ::env(TAP_DECAP_INSERTION) 0
 set ::env(CLOCK_TREE_SYNTH) 0
 
+set ::env(MAGIC_GENERATE_LEF) 0
+set ::env(RUN_SPEF_EXTRACTION) 0
+set ::env(GLB_RT_OBS) "li1 0 0 2920 3520"
+set ::env(GLB_RT_MINLAYER) 2
 
 # Area Configurations. DON'T TOUCH.
 set ::env(FP_SIZING) absolute
@@ -86,15 +90,20 @@ set ::env(FP_PDN_HPITCH) $::env(FP_PDN_VPITCH)
 set ::env(FP_PDN_VSPACING) [expr 5*$::env(FP_PDN_CORE_RING_VWIDTH)]
 set ::env(FP_PDN_HSPACING) [expr 5*$::env(FP_PDN_CORE_RING_HWIDTH)]
 
-set ::env(VDD_NETS) [list {vccd1} {vccd2} {vdda1} {vdda2}]
-set ::env(GND_NETS) [list {vssd1} {vssd2} {vssa1} {vssa2}]
+#set ::env(VDD_NETS) [list {vccd1} {vccd2} {vdda1} {vdda2}]
+#set ::env(GND_NETS) [list {vssd1} {vssd2} {vssa1} {vssa2}]
+set ::env(VDD_NETS) vccd1
+set ::env(GND_NETS) vssd1
+set ::env(VDD_PIN) vccd1
+set ::env(GND_PIN) vssd1
+
 set ::env(SYNTH_USE_PG_PINS_DEFINES) "USE_POWER_PINS"
 
 set ::env(RUN_CVC) 0
 
 # Pin Configurations. DON'T TOUCH
 set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
-set ::env(FP_DEF_TEMPLATE) $script_dir/../../def/user_project_wrapper_empty.def
+#set ::env(FP_DEF_TEMPLATE) $script_dir/../../def/user_project_wrapper_empty.def
 set ::unit 2.4
 set ::env(FP_IO_VEXTEND) [expr 2*$::unit]
 set ::env(FP_IO_HEXTEND) [expr 2*$::unit]
