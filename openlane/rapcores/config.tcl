@@ -56,8 +56,8 @@ set ::env(PL_TARGET_DENSITY) 0.41
 set ::env(ROUTING_CORES) 6
 #set ::env(GLB_RT_ALLOW_CONGESTION) 1
 
-set ::env(VDD_NETS) [list {vccd1} {vccd2} {vdda1} {vdda2}]
-set ::env(GND_NETS) [list {vssd1} {vssd2} {vssa1} {vssa2}]
+set ::env(VDD_NETS) [list {vccd1}]
+set ::env(GND_NETS) [list {vssd1}]
 
 # block met5 with obstruction
 set ::env(GLB_RT_OBS) "met5 0 0 1000 1000"
