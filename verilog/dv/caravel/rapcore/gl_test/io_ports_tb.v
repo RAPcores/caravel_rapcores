@@ -37,6 +37,7 @@
 module io_ports_tb;
 	reg clock;
     	reg RSTB;
+		reg BOOT_DONE_IN;
 	reg power1, power2;
 	reg power3, power4;
 
@@ -92,8 +93,11 @@ module io_ports_tb;
 
 	initial begin
 		RSTB <= 1'b0;
+		BOOT_DONE_IN <= 1'b0;
 		#2000;
 		RSTB <= 1'b1;	    // Release reset
+		#4000
+		BOOT_DONE_IN <= 1'b1;
 	end
 
 	initial begin		// Power-up sequence
@@ -135,7 +139,7 @@ module io_ports_tb;
     wire signed  [12:0]  current1;
     wire signed  [12:0]  current2;
 	wire resetn;
-	assign resetn = ~RSTB;
+	assign resetn = RSTB;
 
   rapcore_harness harness0 (
         .CLK(clock),
@@ -168,7 +172,7 @@ module io_ports_tb;
         .DIRINPUT(io_in[33]),
         .ENINPUT(io_in[11]),
         .ENOUTPUT(io_in[10]),
-		.BOOT_DONE_IN(resetn)
+		.BOOT_DONE_IN(BOOT_DONE_IN)
 
   );
 
