@@ -1,9 +1,11 @@
+PROJ_ROOT = ../../../../..
 FIRMWARE_PATH = ../..
 VERILOG_PATH = ../../../..
 RTL_PATH = ../../../../rtl
 IP_PATH = ../../../../ip
 BEHAVIOURAL_MODELS = ../../
 RAPCORES_PATH = ../../../../../rapcores
+GL_PATH = $(PROJ_ROOT)/openlane/rapcores/runs/rapcores/results/lvs/
 
 GCC_PATH?=//opt/riscv32/bin
 GCC_PREFIX?=riscv32-unknown-elf
@@ -26,7 +28,9 @@ ifeq ($(SIM),RTL)
 	-o $@ $<
 else
 	iverilog -DPROJ_GL -DFUNCTIONAL -DSIM -I $(BEHAVIOURAL_MODELS) \
-	-I $(PDK_PATH) -I $(IP_PATH) -I $(VERILOG_PATH) -I $(RTL_PATH) -I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src \
+	-I $(PDK_PATH) -I $(IP_PATH) -I $(VERILOG_PATH) -I $(RTL_PATH) \
+	-I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src  -I $(RAPCORES_PATH)/testbench \
+	-I $(RAPCORES_PATH)/boards -I $(GL_PATH) \
 	-o $@ $<
 endif
 

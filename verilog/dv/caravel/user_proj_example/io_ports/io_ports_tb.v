@@ -26,7 +26,7 @@
 //`define USE_POWER_PINS
 
 `ifdef PROJ_GL
-  `include "gl/rapcore.v"
+  `include "rapcores.lvs.powered.v"
 `else
   `include "rapcores.v"
 `endif
