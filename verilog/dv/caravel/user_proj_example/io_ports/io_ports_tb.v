@@ -167,7 +167,9 @@ module io_ports_tb;
         .STEPINPUT(mprj_io[32]),
         .DIRINPUT(mprj_io[33]),
         .ENINPUT(mprj_io[11]),
-        .ENOUTPUT(mprj_io[10])
+        .ENOUTPUT(mprj_io[10]),
+		.BOOT_DONE_IN(mprj_io[23])
+
   );
 
 	caravel uut (
