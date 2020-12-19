@@ -122,6 +122,8 @@ module rapcores #(
     assign io_oeb[31] = 1'b0;    // DIROUTPUT
     assign io_oeb[32] = 1'b1;    // STEPINPUT
     assign io_oeb[33] = 1'b1;    // DIRINPUT
+    assign io_oeb[11] = 1'b1;    // ENINPUT
+    assign io_oeb[10] = 1'b0;    // ENOUTPUT
     // unused
     assign io_oeb[0] = 1'b0;    // JTAG I/O
     assign io_oeb[1] = 1'b0;    // SDO
@@ -133,7 +135,6 @@ module rapcores #(
     assign io_oeb[7] = 1'b0;    // IRQ
     assign io_oeb[8] = 1'b1;
     assign io_oeb[9] = 1'b1;
-    assign io_oeb[10] = 1'b1;
 
 
     wire resetn;
@@ -178,7 +179,8 @@ module rapcores #(
         .DIROUTPUT(io_out[31]),
         .STEPINPUT(io_in[32]),
         .DIRINPUT(io_in[33]),
-        .ENINPUT(enable)
+        .ENINPUT(io_in[11]),
+        .ENOUTPUT(io_out[10])
     );
 
 endmodule
