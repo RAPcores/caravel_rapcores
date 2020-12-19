@@ -116,7 +116,7 @@ module rapcores #(
     assign io_oeb[29] = 1'b1;    // HALT
     assign io_oeb[35] = 1'b1;    // SCK
     assign io_oeb[34] = 1'b1;     // CS
-    assign io_oeb[33] = 1'b1;     // COPI
+    assign io_oeb[22] = 1'b1;     // COPI
     assign io_oeb[36] = 1'b0;    // CIPO
     assign io_oeb[30] = 1'b0;    // STEPOUTPUT
     assign io_oeb[31] = 1'b0;    // DIROUTPUT
@@ -136,13 +136,13 @@ module rapcores #(
     assign io_oeb[10] = 1'b1;
 
 
-		wire resetn;
+    wire resetn;
     reg [13:0] resetn_counter = 0;
-		assign resetn = &resetn_counter && rst;
+    assign resetn = &resetn_counter && rst;
 
-		always @(posedge wb_clk_i) begin
-		  if (!resetn && !wb_rst_i && rst) resetn_counter <= resetn_counter +1;
-		end
+    always @(posedge wb_clk_i) begin
+        if (!resetn && !wb_rst_i && rst) resetn_counter <= resetn_counter +1;
+    end
 
     // IO
     assign io_out[7:0] = resetn_counter[13:6]; //count;
