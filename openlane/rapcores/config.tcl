@@ -69,12 +69,10 @@ set ::env(GND_PIN) vssd1
 # block met5 with obstruction
 set ::env(GLB_RT_OBS) "met5 0 0 1000 1000"
 set ::env(GLB_RT_MAXLAYER) 5
-set ::env(VDD_PIN) vccd1
-set ::env(GND_PIN) vssd1
-set ::env(FP_PDN_VOFFSET) "14"
-set ::env(FP_PDN_VPITCH) "180"
-set ::env(FP_PDN_HOFFSET) "14"
-set ::env(FP_PDN_HPITCH) "180"
+#set ::env(FP_PDN_VOFFSET) "14"
+#set ::env(FP_PDN_VPITCH) "180"
+#set ::env(FP_PDN_HOFFSET) "14"
+#set ::env(FP_PDN_HPITCH) "180"
 
 set ::env(SYNTH_USE_PG_PINS_DEFINES) "USE_POWER_PINS"
 
