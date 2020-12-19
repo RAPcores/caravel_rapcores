@@ -2,12 +2,12 @@
 project:
   description: "RAPcore motor and motion controller on the Google sponsored Open MPW shuttles for SKY130."
   foundry: "SkyWater"
-  git_url: "https://github.com/RAPcores/rapcore_caravel_flow"
+  git_url: "https://github.com/RAPcores/caravel_rapcores"
   organization: "RAPcore"
   organization_url: "http://rapcores.org"
   owner: "RAPcore developers"
   process: "SKY130"
-  project_name: "rapcore"
+  project_name: "rapcores"
   tags:
     - "Open MPW"
     - "Test Harness"
