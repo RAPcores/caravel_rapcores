@@ -3,7 +3,7 @@ RTL_PATH = ../../../../rtl
 IP_PATH = ../../../../ip
 BEHAVIOURAL_MODELS = ../../
 RAPCORES_PATH = ../../../../../rapcores
-
+VERILOG_PATH = ../../../..
 GCC_PATH?=//opt/riscv32/bin
 GCC_PREFIX?=riscv32-unknown-elf
 PDK_PATH?=$(PDK_ROOT)/sky130A
