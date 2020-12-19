@@ -24,6 +24,7 @@
 `include "rapcore.v"
 `include "hbridge_coil.v"
 `include "pwm_duty.v"
+`include "rapcore_harness_tb.v"
 
 `ifdef GL
   `include "gl/rapcores.v"
