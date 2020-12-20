@@ -78,12 +78,18 @@ void main()
 
 	// Configure LA probes [31:0], [127:64] as inputs to the cpu
 	// Configure LA probes [63:32] as outputs from the cpu
-	reg_la0_ena = 0xFFFFFFFF;    // [31:0]
-	reg_la1_ena = 0x00000000;    // [95:64]
-	reg_la2_ena = 0x00000000;    // [63:32]
-	reg_la3_ena = 0xFFFFFFFF;    // [127:96]
+	//reg_la0_ena = 0xFFFFFFFF;    // [31:0]
+	//reg_la1_ena = 0x00000000;    // [95:64]
+	//reg_la2_ena = 0x00000000;    // [63:32]
+	//reg_la3_ena = 0xFFFFFFFF;    // [127:96]
 
-	// Set Counter value to zero through LA probes [63:32]
-	reg_la2_data = 0x00000003;
+       //release nReset on 65. Set pin 64 (Enable) as output but stay disabled;
+        reg_la2_ena = ~0x3;    // [95:64]
+        reg_la2_data = 0x2;    // [95:64]
+
+				//Small delay
+				for(int i = 0; i< 5; i++);
+
+        reg_la2_data = 0x3; //Set enable active.
 
 }
