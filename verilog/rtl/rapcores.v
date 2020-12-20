@@ -137,16 +137,22 @@ module rapcores #(
     assign io_oeb[9] = 1'b1;
 
 
-    wire resetn;
-    reg [13:0] resetn_counter = 0;
-    assign resetn = &resetn_counter && rst;
+    wire rstb_oen = ~la_oen[65];
+    wire rstb_in = la_data_in[65];
+    wire rstb = rstb_oen ? rstb_in : 1'b0;
 
-    always @(posedge wb_clk_i) begin
-        if (!resetn && !wb_rst_i && rst) resetn_counter <= resetn_counter +1;
-    end
+		wire resetn;
+		assign resetn = &resetn_counter;
+		reg [13:0] resetn_counter;
+		always @(posedge wb_clk_i)
+		if(!rstb) begin
+			resetn_counter <= 0;
+		end else begin
+		  if (!resetn) resetn_counter <= resetn_counter +1;
+		end
 
     // IO
-    assign io_out[7:0] = resetn_counter[13:6]; //count;
+    assign io_out[9:5] = resetn_counter[13:9]; //count;
 
     rapcore rapcore0 (
 
