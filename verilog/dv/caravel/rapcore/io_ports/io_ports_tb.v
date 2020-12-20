@@ -45,6 +45,7 @@ module io_ports_tb;
 	wire [7:0] mprj_io_0;
 
 	assign mprj_io_0 = mprj_io[7:0];
+    assign mprj_io[3] = 1'b1;
 
 	// External clock is used by default.  Make this artificially fast for the
 	// simulation.  Normally this would be a slow clock and the digital PLL
@@ -73,18 +74,18 @@ module io_ports_tb;
 
 	initial begin
 	    // Observe Output pins [7:0]
-	    wait(mprj_io_0 == 8'h01);
-	    wait(mprj_io_0 == 8'h02);
-	    wait(mprj_io_0 == 8'h03);
-    	    wait(mprj_io_0 == 8'h04);
-	    wait(mprj_io_0 == 8'h05);
-            wait(mprj_io_0 == 8'h06);
-	    wait(mprj_io_0 == 8'h07);
-            wait(mprj_io_0 == 8'h08);
-	    wait(mprj_io_0 == 8'h09);
-            wait(mprj_io_0 == 8'h0A);
-	    wait(mprj_io_0 == 8'hFF);
-	    wait(mprj_io_0 == 8'h00);
+        wait(mprj_io_0 == 8'h01);
+        wait(mprj_io_0 == 8'h02);
+        wait(mprj_io_0 == 8'h03);
+        wait(mprj_io_0 == 8'h04);
+        wait(mprj_io_0 == 8'h05);
+        wait(mprj_io_0 == 8'h06);
+        wait(mprj_io_0 == 8'h07);
+        wait(mprj_io_0 == 8'h08);
+        wait(mprj_io_0 == 8'h09);
+        wait(mprj_io_0 == 8'h0A);
+        wait(mprj_io_0 == 8'hFF);
+        wait(mprj_io_0 == 8'h00);
 
 	    $display("Monitor: Test 1 Mega-Project IO (RTL) Passed");
 	    $finish;
@@ -96,19 +97,19 @@ module io_ports_tb;
 		RSTB <= 1'b1;	    // Release reset
 	end
 
+    reg bootdone = 1'b0;
 	initial begin		// Power-up sequence
 		power1 <= 1'b0;
 		power2 <= 1'b0;
 		power3 <= 1'b0;
 		power4 <= 1'b0;
-		#200;
+        #400
 		power1 <= 1'b1;
-		#200;
 		power2 <= 1'b1;
-		#200;
 		power3 <= 1'b1;
-		#200;
 		power4 <= 1'b1;
+        #400000;
+        bootdone <= 1'b1;
 	end
 
 	always @(mprj_io) begin
@@ -168,7 +169,7 @@ module io_ports_tb;
         .DIRINPUT(mprj_io[33]),
         .ENINPUT(mprj_io[11]),
         .ENOUTPUT(mprj_io[10]),
-		.BOOT_DONE_IN(mprj_io[15])
+		.BOOT_DONE_IN(bootdone)
 
   );
 
