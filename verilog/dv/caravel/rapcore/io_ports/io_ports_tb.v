@@ -39,6 +39,7 @@ module io_ports_tb;
 	reg clock;
     	reg RSTB;
       reg CSB;
+      reg boot_done;
 	reg power1, power2;
 	reg power3, power4;
 
@@ -95,10 +96,13 @@ module io_ports_tb;
 
 	initial begin
 		RSTB <= 1'b0;
+		boot_done = 1'b0;
 		#2000;
 		RSTB <= 1'b1;	    // Release reset
 		#170000;
 		CSB = 1'b0;		// CSB can be released
+		#320000;
+		boot_done = 1'b1;
 	end
 
 	initial begin		// Power-up sequence
@@ -173,7 +177,7 @@ module io_ports_tb;
         .DIRINPUT(mprj_io[33]),
         .ENINPUT(mprj_io[11]),
         .ENOUTPUT(mprj_io[10]),
-		.BOOT_DONE_IN(mprj_io[15])
+		.BOOT_DONE_IN(boot_done)
 
   );
 
