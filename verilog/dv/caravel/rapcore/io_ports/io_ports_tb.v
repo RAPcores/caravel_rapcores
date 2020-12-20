@@ -2,13 +2,14 @@
 
 `timescale 1 ns / 1 ps
 
+`include "defines.v"
+`include "mpw_one_defines.v"
+`include "macro_params.v"
+`include "constants.v"
+
 `ifdef PROJ_GL
   `include "rapcores.lvs.powered.v"
 `else
-	`include "defines.v"
-	`include "mpw_one_defines.v"
-	`include "macro_params.v"
-	`include "constants.v"
 	`include "quad_enc.v"
 	`include "spi.v"
 	`include "dda_timer.v"
