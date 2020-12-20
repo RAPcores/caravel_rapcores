@@ -34,9 +34,7 @@ ifeq ($(SIM),RTL)
 	-o $@ $<
 else
 	iverilog -DPROJ_GL -DFUNCTIONAL -DSIM -I $(BEHAVIOURAL_MODELS) \
-	-I $(PDK_PATH) -I $(IP_PATH) -I $(VERILOG_PATH) -I $(RTL_PATH) \
-	-I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src  -I $(RAPCORES_PATH)/testbench \
-	-I $(RAPCORES_PATH)/boards -I $(GL_PATH) \
+	-I $(PDK_PATH) -I $(IP_PATH) -I $(RTL_PATH) -I $(RAPCORES_PATH)/.. -I $(RAPCORES_PATH)/src -I $(RAPCORES_PATH)/testbench -I $(RAPCORES_PATH)/boards \
 	-o $@ $<
 endif
 
