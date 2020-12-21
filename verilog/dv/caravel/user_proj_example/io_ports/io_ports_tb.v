@@ -2,9 +2,6 @@
 
 `timescale 1 ns / 1 ps
 
-//`define USE_POWER_PINS
-
-
 `include "defines.v"
 `include "mpw_one_defines.v"
 `include "macro_params.v"
@@ -24,9 +21,12 @@
 `include "rapcore.v"
 `include "hbridge_coil.v"
 `include "pwm_duty.v"
+`include "rapcore_harness_tb.v"
 
-`ifdef GL
-  `include "gl/rapcores.v"
+//`define USE_POWER_PINS
+
+`ifdef PROJ_GL
+  `include "rapcores.lvs.powered.v"
 `else
   `include "rapcores.v"
 `endif
@@ -135,86 +135,42 @@ module io_ports_tb;
     wire signed  [12:0]  current1;
     wire signed  [12:0]  current2;
 
-	wire analog_out1;
-	wire analog_out2;
-    reg             analog_cmp1;
-    reg             analog_cmp2;
-    reg     [40:0]  step_clock;
-    reg     [20:0]  cnt;
-    reg     [12:0]  current_abs1;
-    reg     [12:0]  current_abs2;
-    wire            phase_a1_l;
-    wire            phase_a2_l;
-    wire            phase_b1_l;
-    wire            phase_b2_l;
-    wire            phase_a1_h;
-    wire            phase_a2_h;
-    wire            phase_b1_h;
-    wire            phase_b2_h;
-	wire 			resetn;
+	//assign resetn = RSTB;
 
-//	assign CHARGEPUMP		= mprj_io[15];
-	assign analog_out1		= mprj_io[27];
-	assign analog_out2		= mprj_io[28];
-	assign phase_a1_l			= mprj_io[23];
-	assign phase_a2_l			= mprj_io[19];
-	assign phase_b1_l			= mprj_io[16];
-	assign phase_b2_l			= mprj_io[20];
-	assign phase_a1_h		= mprj_io[21];
-	assign phase_a2_h		= mprj_io[18];
-	assign phase_b1_h		= mprj_io[14];
-	assign phase_b2_h		= mprj_io[17];
-//	assign BUFFER_DTR		= mprj_io[37];
-//	assign MOVE_DONE		= mprj_io[24];
-//	assign CIPO				= mprj_io[36];
-//	assign STEPOUTPUT		= mprj_io[30];
-//	assign DIROUTPUT		= mprj_io[31];
-	assign mprj_io[25]		= analog_cmp1;
-	assign mprj_io[26]		= analog_cmp2;
-//	assign mprj_io[18]		= ENC_B;
-//	assign mprj_io[19]		= ENC_A;
-//	assign mprj_io[29]		= HALT;
-//	assign mprj_io[35]		= SCK;
-//	assign mprj_io[34]		= CS;
-//	assign mprj_io[22]		= COPI;
-	assign mprj_io[32]		= step;
-	assign mprj_io[33]		= dir;
-	assign resetn = RSTB;
+  rapcore_harness harness0 (
+        .CLK(clock),
+        //.resetn_in(resetn),
+        .CHARGEPUMP(mprj_io[15]),
+        .analog_cmp1(mprj_io[25]),
+        .analog_out1(mprj_io[27]),
+        .analog_cmp2(mprj_io[26]),
+        .analog_out2(mprj_io[28]),
+        .PHASE_A1(mprj_io[23]),
+        .PHASE_A2(mprj_io[19]),
+        .PHASE_B1(mprj_io[16]),
+        .PHASE_B2(mprj_io[20]),
+        .PHASE_A1_H(mprj_io[21]),
+        .PHASE_A2_H(mprj_io[18]),
+        .PHASE_B1_H(mprj_io[14]),
+        .PHASE_B2_H(mprj_io[17]),
+        .ENC_B(mprj_io[12]),
+        .ENC_A(mprj_io[13]),
+        .BUFFER_DTR(mprj_io[37]),
+        .MOVE_DONE(mprj_io[24]),
+        .HALT(mprj_io[29]),
+        .SCK(mprj_io[35]),
+        .CS(mprj_io[34]),
+        .COPI(mprj_io[22]),
+        .CIPO(mprj_io[36]),
+        .STEPOUTPUT(mprj_io[30]),
+        .DIROUTPUT(mprj_io[31]),
+        .STEPINPUT(mprj_io[32]),
+        .DIRINPUT(mprj_io[33]),
+        .ENINPUT(mprj_io[11]),
+        .ENOUTPUT(mprj_io[10]),
+		.BOOT_DONE_IN(mprj_io[15])
 
-    always @(posedge clock) begin
-        if (!resetn) begin
-            cnt <= 0;
-            analog_cmp1 <= 1;
-            analog_cmp2 <= 1;
-            step <= 1;
-            step_clock <= 40'b0;
-        end
-        else begin
-            cnt <= cnt + 1;
-            enable_in <= 1;
-            if (current1[12] == 1'b1) begin
-                current_abs1 = -current1;
-            end
-            else begin
-                current_abs1 = current1;
-            end
-            if (current2[12] == 1'b1) begin
-                current_abs2 = -current2;
-            end
-            else begin
-                current_abs2 = current2;
-            end
-            step_clock <= step_clock + 1;
-            step <= step_clock[10];
-            analog_cmp1 <= (current_abs1[11:0] >= target_current1[11:0]); // compare unsigned
-            analog_cmp2 <= (current_abs2[11:0] >= target_current2[11:0]);
-            if (cnt <= 20'hC400) begin
-                dir <= 1;
-            end
-            else
-                dir <= 0;
-        end
-    end
+  );
 
 	caravel uut (
 		.vddio	  (VDD3V3),
@@ -253,37 +209,5 @@ module io_ports_tb;
 		.io3()			// not used
 	);
 
-    pwm_duty duty1(
-        .clk(clock),
-        .resetn(resetn),
-        .pwm(analog_out1),
-        .duty(target_current1)
-    );
-    pwm_duty duty2(
-        .clk(clock),
-        .resetn(resetn),
-        .pwm(analog_out2),
-        .duty(target_current2)
-    );
-    hbridge_coil hbridge_coil1(
-        .clk(clock),
-        .resetn(resetn),
-        .low_1(phase_a1_l),
-        .high_1(phase_a1_h),
-        .low_2(phase_a2_l),
-        .high_2(phase_a2_h),
-        .current(current1),
-        .polarity_invert_config(1'b0)
-    );
-    hbridge_coil hbridge_coil2(
-        .clk(clock),
-        .resetn(resetn),
-        .low_1(phase_b1_l),
-        .high_1(phase_b1_h),
-        .low_2(phase_b2_l),
-        .high_2(phase_b2_h),
-        .current(current2),
-        .polarity_invert_config(1'b0)
-    );
 endmodule
 `default_nettype wire
