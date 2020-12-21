@@ -58,7 +58,7 @@ void main()
 	reg_mprj_io_33 =  GPIO_MODE_USER_STD_INPUT_NOPULL;
 	reg_mprj_io_34 =  GPIO_MODE_USER_STD_INPUT_NOPULL;
 	reg_mprj_io_35 =  GPIO_MODE_USER_STD_INPUT_NOPULL;
-	reg_mprj_io_36 =  GPIO_MODE_USER_STD_OUTPUT;
+	reg_mprj_io_36 =  GPIO_MODE_USER_STD_BIDIRECTIONAL;
 	reg_mprj_io_37 =  GPIO_MODE_USER_STD_OUTPUT;
 
         /* Apply configuration */
