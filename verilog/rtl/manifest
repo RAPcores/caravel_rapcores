@@ -1,6 +1,6 @@
 d328f88dd48e015bbaa95e0d7c88954343cc5632  DFFRAM.v
 dab57f3c5464ce3354219840dae589a3fcd27135  DFFRAMBB.v
-c39b4f6a67a044aec105ca83ef1eb6d3f2b06028  caravel.v
+86b436806154edca4d5e4b6520b709c7c071c623  caravel.v
 b2feeb2a098894d5d731a5b011858a471e855d73  caravel_clocking.v
 38d2c674ea1f696bf2c9deaeee5f9b044f2445fb  chip_io.v
 d772308bd2a72121d7ed9dcdd40c8e6cbbe4b43c  clock_div.v
@@ -24,7 +24,7 @@ b16ace2e7a9c02ed5f8f918fe9e4a460422c7304  mprj_io.v
 98bd1d468969f47c370eb54ea8f178105953c8c9  mprj_logic_high.v
 1352e5821905dce0b8203e9bee5e1adff02a9cbc  pads.v
 5f1d9a90287fa5ae6635933c287e8e9e3e39931a  picorv32.v
-cb352f136275693fbd12e9f7a219e40b0b159908  rapcores.v
+98f11e3ecf413ee1558700d968c9e3a8e6c5434a  rapcores.v
 669d16642d5dd5f6824812754db20db98c9fe17b  ring_osc2x13.v
 6864cc10dacfd3edb4c66825b7a301ab097cea0d  simple_por.v
 917aa6e1bb869f973c79fb2c7894eab882ead74c  simple_spi_master.v
