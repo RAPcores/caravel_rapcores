@@ -5,7 +5,7 @@ RTL_PATH = ../../../../rtl
 IP_PATH = ../../../../ip
 BEHAVIOURAL_MODELS = ../../
 RAPCORES_PATH = ../../../../../rapcores
-GL_PATH = $(PROJ_ROOT)/openlane/rapcores/runs/rapcores/results/lvs/
+#GL_PATH = $(PROJ_ROOT)/openlane/rapcores/runs/rapcores/results/lvs/
 
 
 

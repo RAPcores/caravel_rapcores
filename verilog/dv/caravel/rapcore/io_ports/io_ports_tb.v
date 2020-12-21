@@ -8,7 +8,7 @@
 //`define USE_POWER_PINS
 
 `ifdef PROJ_GL
-    `include "../gl/rapcores.v"
+    `include "gl/rapcores.v"
 `else
     `include "rapcores.v"
     `include "macro_params.v"
