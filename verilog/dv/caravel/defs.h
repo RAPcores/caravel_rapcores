@@ -1,3 +1,20 @@
+/*
+ * SPDX-FileCopyrightText: 2020 Efabless Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #ifndef _STRIVE_H_
 #define _STRIVE_H_
 
@@ -176,11 +193,15 @@ extern uint32_t flashio_worker_end;
 #define GPIO_MODE_MGMT_STD_INPUT_PULLDOWN  0x0803
 #define GPIO_MODE_MGMT_STD_INPUT_PULLUP	   0x0c03
 #define GPIO_MODE_MGMT_STD_OUTPUT	   0x1809
+#define GPIO_MODE_MGMT_STD_BIDIRECTIONAL   0x1801
+#define GPIO_MODE_MGMT_STD_ANALOG   	   0x000b
 
 #define GPIO_MODE_USER_STD_INPUT_NOPULL	   0x0402
 #define GPIO_MODE_USER_STD_INPUT_PULLDOWN  0x0802
 #define GPIO_MODE_USER_STD_INPUT_PULLUP	   0x0c02
 #define GPIO_MODE_USER_STD_OUTPUT	   0x1808
+#define GPIO_MODE_USER_STD_BIDIRECTIONAL   0x1800
+#define GPIO_MODE_USER_STD_ANALOG   	   0x000a
 
 // --------------------------------------------------------
 #endif
