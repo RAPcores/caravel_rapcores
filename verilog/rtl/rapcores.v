@@ -140,6 +140,7 @@ module rapcores #(
     wire rstb_oen = ~la_oen[65];
     wire rstb_in = la_data_in[65];
     wire rstb = rstb_oen ? rstb_in : 1'b0;
+    assign io_oeb[36] = io_in[34]; // CIPO Input when CS not active
 
 		wire resetn;
 		assign resetn = &resetn_counter;
