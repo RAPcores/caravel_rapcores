@@ -40,11 +40,8 @@ module io_ports_tb;
 	reg power1, power2;
 	reg power3, power4;
 
-    	wire gpio;
-    	wire [37:0] mprj_io;
-	wire [7:0] mprj_io_0;
-
-	assign mprj_io_0 = mprj_io[7:0];
+	wire gpio;
+	wire [37:0] mprj_io;
     assign mprj_io[3] = 1'b1;
 
 	// External clock is used by default.  Make this artificially fast for the
@@ -73,21 +70,71 @@ module io_ports_tb;
 	end
 
 	initial begin
-	    // Observe Output pins [7:0]
-        wait(mprj_io_0 == 8'h01);
-        wait(mprj_io_0 == 8'h02);
-        wait(mprj_io_0 == 8'h03);
-        wait(mprj_io_0 == 8'h04);
-        wait(mprj_io_0 == 8'h05);
-        wait(mprj_io_0 == 8'h06);
-        wait(mprj_io_0 == 8'h07);
-        wait(mprj_io_0 == 8'h08);
-        wait(mprj_io_0 == 8'h09);
-        wait(mprj_io_0 == 8'h0A);
-        wait(mprj_io_0 == 8'hFF);
-        wait(mprj_io_0 == 8'h00);
+	    // Observe Output pins
+		wait(mprj_io[24] == 1'b1); // Move done =0
+		wait(mprj_io[37:36] == 2'b10); // DTR:CIPO
+		#1 $display("SPI response");
+		wait(mprj_io[37:36] == 2'b11);
+		wait(mprj_io[37:36] == 2'b10);
+		#1 $display("Encoder data transmit");
+		wait(mprj_io[15] == 1'b1);
+		wait(mprj_io[15] == 1'b0);
+		wait(mprj_io[15] == 1'b1);
+		#1 $display("Charge pump switching");
+		wait(mprj_io[27] == 1'b1);
+		wait(mprj_io[27] == 1'b0);
+		wait(mprj_io[27] == 1'b1);
+		wait(mprj_io[28] == 1'b1);
+		wait(mprj_io[28] == 1'b0);
+		wait(mprj_io[28] == 1'b1);
+		#1 $display("Both ADC outputs switching");
+		wait(mprj_io[24] == 1'b1);
+		#1 $display("DDA running");
+		wait(mprj_io[30] == 0); // Step out
+		wait(mprj_io[31] == 0); // Direction output only tested in one direction
+		wait(mprj_io[30] == 1); // Step out
+		wait(mprj_io[30] == 0); // Step out
+		#1 $display("Step out switching");
+		wait(mprj_io[23] == 1'b1);
+		wait(mprj_io[19] == 1'b1);
+		wait(mprj_io[16] == 1'b1);
+		wait(mprj_io[20] == 1'b1);
+		wait(mprj_io[21] == 1'b1);
+		wait(mprj_io[18] == 1'b1);
+		wait(mprj_io[14] == 1'b1);
+		wait(mprj_io[17] == 1'b1);
 
-	    $display("Monitor: Test 1 Mega-Project IO (RTL) Passed");
+		wait(mprj_io[23] == 1'b0);
+		wait(mprj_io[19] == 1'b0);
+		wait(mprj_io[16] == 1'b0);
+		wait(mprj_io[20] == 1'b0);
+		wait(mprj_io[21] == 1'b0);
+		wait(mprj_io[18] == 1'b0);
+		wait(mprj_io[14] == 1'b0);
+		wait(mprj_io[17] == 1'b0);
+
+		wait(mprj_io[23] == 1'b1);
+		wait(mprj_io[19] == 1'b1);
+		wait(mprj_io[16] == 1'b1);
+		wait(mprj_io[20] == 1'b1);
+		wait(mprj_io[21] == 1'b1);
+		wait(mprj_io[18] == 1'b1);
+		wait(mprj_io[14] == 1'b1);
+		wait(mprj_io[17] == 1'b1);
+
+		wait(mprj_io[23] == 1'b0);
+		wait(mprj_io[19] == 1'b0);
+		wait(mprj_io[16] == 1'b0);
+		wait(mprj_io[20] == 1'b0);
+		wait(mprj_io[21] == 1'b0);
+		wait(mprj_io[18] == 1'b0);
+		wait(mprj_io[14] == 1'b0);
+		wait(mprj_io[17] == 1'b0);
+		#1 $display("Bridge outputs switching");
+		//wait(mprj_io[10] ==  // Enable output
+		//wait(mprj_io[24] ==  // Move done
+		//wait(mprj_io[29] ==  // Halt
+	    $display("Monitor: Test 1 RAPcores Passed");
 	    $finish;
 	end
 
@@ -112,8 +159,8 @@ module io_ports_tb;
         //bootdone <= 1'b1;
 	end
 
-	always @(mprj_io) begin
-		#1 $display("MPRJ-IO state = %b ", mprj_io[37:0]);
+	always @(mprj_io[5]) begin
+		#1 $display("Booting ", mprj_io[37:5]);
 	end
 
 	wire flash_csb;
