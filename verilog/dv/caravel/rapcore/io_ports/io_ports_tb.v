@@ -42,9 +42,9 @@ module io_ports_tb;
 
     	wire gpio;
     	wire [37:0] mprj_io;
-	wire [7:0] mprj_io_0;
+	wire [16:0] mprj_io_0;
 
-	assign mprj_io_0 = mprj_io[7:0];
+	assign mprj_io_0 = mprj_io[30:14];
     assign mprj_io[3] = 1'b1;
 
 	// External clock is used by default.  Make this artificially fast for the
@@ -74,20 +74,15 @@ module io_ports_tb;
 
 	initial begin
 	    // Observe Output pins [7:0]
-        wait(mprj_io_0 == 8'h01);
-        wait(mprj_io_0 == 8'h02);
-        wait(mprj_io_0 == 8'h03);
-        wait(mprj_io_0 == 8'h04);
-        wait(mprj_io_0 == 8'h05);
-        wait(mprj_io_0 == 8'h06);
-        wait(mprj_io_0 == 8'h07);
-        wait(mprj_io_0 == 8'h08);
-        wait(mprj_io_0 == 8'h09);
-        wait(mprj_io_0 == 8'h0A);
-        wait(mprj_io_0 == 8'hFF);
-        wait(mprj_io_0 == 8'h00);
-
-	    $display("Monitor: Test 1 Mega-Project IO (RTL) Passed");
+		wait(mprj_io_0 == 17'b01000011001100110);
+		wait(mprj_io_0 == 17'b01100011000101110);
+		wait(mprj_io_0 == 17'b01000011001100110);
+		wait(mprj_io_0 == 17'b01100011001100011);
+		wait(mprj_io_0 == 17'b01000011001100110);
+		wait(mprj_io_0 == 17'b01110011000101110);
+		wait(mprj_io_0 == 17'b01101011001100011);
+		wait(mprj_io_0 == 17'b01100011001100011);
+	    $display("Monitor: Test 1 RAPcores Passed");
 	    $finish;
 	end
 
